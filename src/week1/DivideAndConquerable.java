@@ -37,10 +37,18 @@ public interface DivideAndConquerable<OutputType> {
         // if the input is f(n), the output must be the list of [f(n-1), f(n-2)]
         List<? extends DivideAndConquerable<OutputType>> subcomponents = this.decompose();
 
+        /** make a list of intermediate results
+        * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))
+        * that can be looked up later.
+        * -> avoid recalculating already calculated stuff!
+        * This is JUST a result list of the intermediate results! */
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
-
+        // now add each subcomponent to the intermediateResults list
+        // here 'add' is NOT a sum!
+        // It ADDS the subcomponent element to the list!
         subcomponents.forEach(subcomponent -> intermediateResults.add(subcomponent.divideAndConquer()));
 
+        // since it's not a base case, we need to return the recombination, i.e. f(4)+f(3), here IT IS the sum!
         return recombine(intermediateResults);
     }
 }
