@@ -1,6 +1,6 @@
 # intelliJ User-specific stuff
 .idea
-.idea/**
+.idea/*.xml
 **.iml
 out/
 
