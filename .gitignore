@@ -4,6 +4,7 @@
 # intelliJ User-specific stuff
 .idea
 .idea/*.xml
+.idea/**/*.xml
 **.iml
 out/
 
