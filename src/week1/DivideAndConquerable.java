@@ -43,6 +43,7 @@ public interface DivideAndConquerable<OutputType> {
         * -> avoid recalculating already calculated stuff!
         * This is JUST a result list of the intermediate results! */
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
+
         // now add each subcomponent to the intermediateResults list
         // here 'add' is NOT a sum!
         // It ADDS the subcomponent element to the list!
