@@ -3,7 +3,7 @@ package week1;
 import java.util.List;
 import java.util.ArrayList;
 
-    public interface DivideAndConquerable<OutputType> {
+public interface DivideAndConquerableThreads<OutputType> {
 
     // 4 basic methods to split the recursion into feasible smaller problems
     /** fibonacci example:
@@ -38,10 +38,10 @@ import java.util.ArrayList;
         List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = this.decompose();
 
         /** make a list of intermediate results
-        * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))
-        * that can be looked up later.
-        * -> avoid recalculating already calculated stuff!
-        * This is JUST a result list of the intermediate results! */
+         * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))
+         * that can be looked up later.
+         * -> avoid recalculating already calculated stuff!
+         * This is JUST a result list of the intermediate results! */
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
 
         // now add each subcomponent to the intermediateResults list
