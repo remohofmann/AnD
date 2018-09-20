@@ -41,6 +41,13 @@ public class FibonacciSimpleTest {
         Assert.assertEquals(fiboSimple5.divideAndConquer().intValue(), 5);
         Assert.assertEquals(fiboSimple10.divideAndConquer().intValue(), 55);
         Assert.assertEquals(new FibonacciSimple<Integer>(21).divideAndConquer().intValue(), 10946);
+        Assert.assertEquals(new FibonacciSimple<Integer>(32).divideAndConquer().intValue(), 2178309);
+
+        int l = 30;
+        for (int i=0; i<l; i++){
+            System.out.println(i + ": " + new FibonacciSimple<Integer>(i).divideAndConquer().intValue());
+        }
+
     }
 
     @Test

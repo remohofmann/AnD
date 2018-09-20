@@ -3,12 +3,12 @@ package week1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FibonacciSimple<I extends Number> implements DivideAndConquerable<Integer> {
+public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<Integer> {
 
     private Integer fibValue;
 
 
-    public FibonacciSimple(int fibValue) {
+    public FibonacciSimple(Integer fibValue) {
         /** does this allocation work? */
         this.fibValue = fibValue;
     }
@@ -26,9 +26,9 @@ public class FibonacciSimple<I extends Number> implements DivideAndConquerable<I
     @Override
     public List<? extends DivideAndConquerable<Integer>> decompose() {
         int tempV = this.fibValue.intValue();
-        List<FibonacciSimple<Number>> decomposedList = new ArrayList<>();
-        decomposedList.add(new FibonacciSimple<Number>(tempV - 1));
-        decomposedList.add(new FibonacciSimple<Number>(tempV - 2));
+        List<FibonacciSimple<Integer>> decomposedList = new ArrayList<>();
+        decomposedList.add(new FibonacciSimple<Integer>(tempV - 1));
+        decomposedList.add(new FibonacciSimple<Integer>(tempV - 2));
         return decomposedList;
     }
 
