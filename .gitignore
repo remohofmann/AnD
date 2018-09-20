@@ -1,7 +1,7 @@
 # intelliJ User-specific stuff
 .idea
 .idea/**
-*.iml
+**.iml
 out/
 
 # eclipse
