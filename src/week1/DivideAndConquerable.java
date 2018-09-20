@@ -46,7 +46,7 @@ public interface DivideAndConquerable<OutputType> {
 
         // now add each subcomponent to the intermediateResults list
         // here 'add' is NOT a sum!
-        // It ADDS the subcomponent element to the list!
+        // It ADDS the subcomponents to the list!
         subcomponents.forEach(subcomponent -> intermediateResults.add(subcomponent.divideAndConquer()));
 
         // since it's not a base case, we need to return the recombination, i.e. f(4)+f(3), here IT IS the sum!
