@@ -1,31 +1,46 @@
-package  week1;
-import  java.util.List;
-import  java.util.ArrayList;
+package week1;
 
-public  interface  DivideAndConquerable  <OutputType > {
+import java.util.List;
+import java.util.ArrayList;
 
-	boolean     isBasic  () ;
-	OutputType  baseFun  () ;
+public interface DivideAndConquerable<OutputType> {
 
-	List <?  extends  DivideAndConquerable <OutputType >> decompose  () ;
+    // 4 basic methods to split the recursion into feasible smaller problems
+    /** fibonacci example:
+     * 1. do we have a base case? 'isBasic()'?
+     * 2. if yes, return its value 'baseFunction()'
+     * 3. if no, reduce case complexity, i.e. decompose()
+     * 4. & recombine(): f(5) = f(4) + f(3)
+     */
+    boolean isBasic();
+    OutputType baseFunction();
+    List<? extends DivideAndConquerable<OutputType>> decompose();
+    OutputType recombine(List<OutputType> intermediateResults);
 
-	OutputType recombine (List <OutputType > intermediateResults) ;
-	// see  next  slide ...
+    // what is this????
+    default List<? extends DivideAndConquerable<OutputType>> stump() {
+        return new ArrayList<DivideAndConquerable<OutputType>>(0);
+    }
 
-	default  List <?  extends  DivideAndConquerable <OutputType >> stump  () { 
-		return  new ArrayList <DivideAndConquerable <OutputType >>(0);
-	}
-	default  OutputType  divideAndConquer() {
-		if (this.isBasic())  {
-			return  this.baseFun();
-		}
 
-		List <?  extends  DivideAndConquerable <OutputType >> subcomponents = this.decompose();
+    // DEFAULT divideAndConquer method which returns a type of 'OutputType'
+    // example: fibonacci will return an integer (i.e. 'int')
+    default OutputType divideAndConquer() {
+        // if 'this' is a basic case, return the 'basic result'
+        // example: fibonacci(1)=1, f(0)=0
+        if (this.isBasic()) {
+            return this.baseFunction();
+        }
 
-		List <OutputType > intermediateResults = new  ArrayList <OutputType>(subcomponents.size());
+        // if this is NOT a base case, do what needs to be done to reduce the problem size
+        // example: f(5) = f(4) + f(3) which is what will need to be returned!
+        // if the input is f(n), the output must be the list of [f(n-1), f(n-2)]
+        List<? extends DivideAndConquerable<OutputType>> subcomponents = this.decompose();
 
-		subcomponents.forEach(subcomponent -> intermediateResults.add(subcomponent.divideAndConquer()));
+        List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
 
-		return  recombine(intermediateResults);
-	}
+        subcomponents.forEach(subcomponent -> intermediateResults.add(subcomponent.divideAndConquer()));
+
+        return recombine(intermediateResults);
+    }
 }
