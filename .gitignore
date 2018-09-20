@@ -1,0 +1,9 @@
+# intelliJ User-specific stuff
+.idea
+.idea/**
+*.iml
+out/
+
+# eclipse
+.classpath
+.project
