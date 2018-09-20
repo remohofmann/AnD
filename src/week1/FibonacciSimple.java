@@ -15,7 +15,7 @@ public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<
 
     @Override
     public boolean isBasic() {
-        return this.fibValue.intValue() == 1 || this.fibValue.intValue() == 0;
+        return this.fibValue.equals(new Integer(1)) || this.fibValue.equals(new Integer(0));
     }
 
     @Override
@@ -36,6 +36,6 @@ public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<
     public Integer recombine(List<Integer> intermediateResults) {
         int result = 0;
         result += intermediateResults.stream().mapToInt(Integer::intValue).sum();
-        return result;
+        return new Integer(result);
     }
 }
