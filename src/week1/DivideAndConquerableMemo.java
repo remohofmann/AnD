@@ -3,21 +3,12 @@ package week1;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerable<OutputType> {
 
-
-    // NEW: add a class cache variable
-    // TODO: cannot use OutputType in a static context! What other means are there to have a cache?
-    HashMap<Integer, OutputType> fibonacciHashMap = new HashMap<>();
-
-    /**
-     * default method to be overriden
-     */
-    @Override
-    default OutputType divideAndConquer() {
-
-//        fibonacciHashMap.computeIfAbsent()
+    // NEW divideAncConquer method with a parameter.
+    default OutputType divideAndConquer(Map<OutputType,OutputType> calculatedFibonaccis) {
 
         if (this.isBasic()) {
             return this.baseFunction();
