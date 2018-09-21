@@ -3,28 +3,23 @@ package week1;
 import java.util.List;
 import java.util.ArrayList;
 
-public interface DivideAndConquerable<OutputType> {
+public interface DivideAndConquerableThreads<OutputType> {
 
     // 4 basic methods to split the recursion into feasible smaller problems
-
-    /**
-     * fibonacci example:
+    /** fibonacci example:
      * 1. do we have a base case? 'isBasic()'?
      * 2. if yes, return its value 'baseFunction()'
      * 3. if no, reduce case complexity, i.e. decompose()
      * 4. & recombine(): f(5) = f(4) + f(3)
      */
     boolean isBasic();
-
     OutputType baseFunction();
-
-    List<? extends DivideAndConquerable<OutputType>> decompose();
-
+    List<? extends DivideAndConquerableMemo<OutputType>> decompose();
     OutputType recombine(List<OutputType> intermediateResults);
 
     // what is this????
-    default List<? extends DivideAndConquerable<OutputType>> stump() {
-        return new ArrayList<DivideAndConquerable<OutputType>>(0);
+    default List<? extends DivideAndConquerableMemo<OutputType>> stump() {
+        return new ArrayList<DivideAndConquerableMemo<OutputType>>(0);
     }
 
 
@@ -40,7 +35,7 @@ public interface DivideAndConquerable<OutputType> {
         // if this is NOT a base case, do what needs to be done to reduce the problem size
         // example: f(5) = f(4) + f(3) which is what will need to be returned!
         // if the input is f(n), the output must be the list of [f(n-1), f(n-2)]
-        List<? extends DivideAndConquerable<OutputType>> subcomponents = this.decompose();
+        List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = this.decompose();
 
         /** make a list of intermediate results
          * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))

@@ -4,13 +4,12 @@
 # intelliJ User-specific stuff
 .idea
 .idea/*.xml
-AnD_Exercices.iml
+**.iml
 out/
 
 # eclipse
 .classpath
 .project
 
-# compiled classes
-bin
-bin/*
+# compiled binary
+bin/
