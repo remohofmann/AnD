@@ -6,12 +6,10 @@ import java.util.List;
 public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMemo<Integer> {
 
     private Integer fibValue;
-    private Integer[] computedValuesArray;
 
 
     public FibonacciMemo(Integer fibValue) {
         this.fibValue = fibValue;
-        this.computedValuesArray = new Integer[this.fibValue.intValue()];
     }
 
     @Override
@@ -25,7 +23,7 @@ public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMem
     }
 
     @Override
-    public List<? extends DivideAndConquerable<Integer>> decompose() {
+    public List<? extends DivideAndConquerableMemo<Integer>> decompose() {
         int tempV = this.fibValue.intValue();
         List<FibonacciMemo<Integer>> decomposedList = new ArrayList<>();
         decomposedList.add(new FibonacciMemo<Integer>(tempV - 1));

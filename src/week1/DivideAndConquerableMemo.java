@@ -8,6 +8,10 @@ import java.util.Map;
 
 public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerable<OutputType> {
 
+    @Override
+    List<? extends DivideAndConquerableMemo<OutputType>> decompose();
+
+
 
     // NEW divideAncConquer method with a parameter.
     default OutputType divideAndConquer(OutputType[] computedFiboValuesArray) {
@@ -16,11 +20,17 @@ public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerab
             return this.baseFunction();
         }
 
-        List<? extends DivideAndConquerable<OutputType>> subcomponents = this.decompose();
+        List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = this.decompose();
 
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
-        subcomponents.forEach(subcomponent -> {
 
+
+        /** TODO: hier happert's: eine Fibonacci - "Funktion" hat einen Input und einen Output.
+         * f(2) = 1
+         * Ich habe keinen Access zum Input, der mir mit dem Array-index behilflich sein könnte!
+         * Wie weiter?
+          */
+        subcomponents.forEach(subcomponent -> {
             if (computedFiboValuesArray.containsKey(subcomponent)) {
                 intermediateResults.add(computedFiboValuesArray.get(subcomponent));
             } else {
@@ -31,6 +41,8 @@ public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerab
                 computedFiboValuesArray.put(subcomponent, subComponentResult);
             }
         });
+
+
 
         return recombine(intermediateResults);
     }
