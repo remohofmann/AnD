@@ -3,14 +3,15 @@ package week1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<Integer> {
+public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMemo<Integer> {
 
     private Integer fibValue;
+    private Integer[] computedValuesArray;
 
 
-    public FibonacciSimple(Integer fibValue) {
-        /** does this allocation work? */
+    public FibonacciMemo(Integer fibValue) {
         this.fibValue = fibValue;
+        this.computedValuesArray = new Integer[this.fibValue.intValue()];
     }
 
     @Override
@@ -26,9 +27,9 @@ public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<
     @Override
     public List<? extends DivideAndConquerable<Integer>> decompose() {
         int tempV = this.fibValue.intValue();
-        List<FibonacciSimple<Integer>> decomposedList = new ArrayList<>();
-        decomposedList.add(new FibonacciSimple<Integer>(tempV - 1));
-        decomposedList.add(new FibonacciSimple<Integer>(tempV - 2));
+        List<FibonacciMemo<Integer>> decomposedList = new ArrayList<>();
+        decomposedList.add(new FibonacciMemo<Integer>(tempV - 1));
+        decomposedList.add(new FibonacciMemo<Integer>(tempV - 2));
         return decomposedList;
     }
 
@@ -39,5 +40,4 @@ public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<
         return new Integer(result);
     }
 
-    /** The default method divideAndConquer() is only called in the test class in the main method! */
 }

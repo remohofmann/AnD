@@ -1,7 +1,6 @@
 package week1;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,9 +15,6 @@ public class FibonacciSimpleTest {
     private FibonacciSimple<Integer> fiboSimple5 = new FibonacciSimple<Integer>(5);
     private FibonacciSimple<Integer> fiboSimple10 = new FibonacciSimple<Integer>(10);
 
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     public void isBasic() {
