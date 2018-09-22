@@ -13,8 +13,8 @@ public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerab
 
 
 
-    // NEW divideAncConquer method with a parameter.
-    default OutputType divideAndConquer(OutputType[] computedFiboValuesArray) {
+    // NEW divideAncConquer method with a parameter. Map is of form Map<ID, value>
+    default OutputType divideAndConquer(Map<OutputType,OutputType> computedFiboValuesArray) {
 
         if (this.isBasic()) {
             return this.baseFunction();
