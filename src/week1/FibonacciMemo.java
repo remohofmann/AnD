@@ -3,29 +3,30 @@ package week1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<Integer> {
+public class FibonacciMemo<I extends Integer> implements DivideAndConquerable<Integer> {
 
-    private Integer fibValue;
+   //private static int[] = new int[10];
+    private int fibValue;
 
 
-    public FibonacciSimple(Integer fibValue) {
-        /** does this allocation work? */
+    public FibonacciMemo(Integer fibValue) {
         this.fibValue = fibValue;
     }
 
     @Override
     public boolean isBasic() {
-        return this.fibValue.equals(new Integer(1)) || this.fibValue.equals(new Integer(0));
+        return this.fibValue < 2;
     }
 
     @Override
     public Integer baseFunction() {
-        return this.fibValue;
+        if(this.isBasic()) return this.fibValue;
+        return null;
     }
 
     @Override
     public List<? extends DivideAndConquerable<Integer>> decompose() {
-        int tempV = this.fibValue.intValue();
+        int tempV = this.fibValue;
         List<FibonacciMemo<Integer>> decomposedList = new ArrayList<>();
         decomposedList.add(new FibonacciMemo<Integer>(tempV - 1));
         decomposedList.add(new FibonacciMemo<Integer>(tempV - 2));
