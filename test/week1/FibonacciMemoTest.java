@@ -21,8 +21,8 @@ public class FibonacciMemoTest {
 
     @Test
     public void calculateFibonacciNumbers() {
-        int l = 30;
-        System.out.println("Fibonacci 10,11,12,...,30");
+        int l = 35;
+        System.out.println("Fibonacci 10,11,12,...,35");
         System.out.println("Fibonacci Simple");
         long simpleStart = System.currentTimeMillis();
         for (int i = 10; i < l; i++) {
@@ -31,7 +31,7 @@ public class FibonacciMemoTest {
         }
         long simpleEnd = System.currentTimeMillis();
         System.out.println();
-        System.out.println("Time: " + (simpleEnd - simpleStart));
+        System.out.println("Time [milli seconds]: " + (simpleEnd - simpleStart));
         System.out.println();
         System.out.println("Fibonacci with Memo");
         simpleStart = System.currentTimeMillis();
@@ -42,7 +42,7 @@ public class FibonacciMemoTest {
         }
         simpleEnd = System.currentTimeMillis();
         System.out.println();
-        System.out.println("Time: " + (simpleEnd - simpleStart));
+        System.out.println("Time [milli seconds]: " + (simpleEnd - simpleStart));
 
         // Measurements (1. number of Fibonacci numbers // 2. time)
         HashMap simpleMap = new HashMap();
