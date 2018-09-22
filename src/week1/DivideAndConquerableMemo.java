@@ -9,7 +9,7 @@ public interface DivideAndConquerableMemo<OutputType> {
     // 4 basic methods to split the recursion into feasible smaller problems
 
     boolean isBasic();
-    OutputType getValue();
+    OutputType getFibValue();
 
     OutputType baseFunction();
 
@@ -28,7 +28,7 @@ public interface DivideAndConquerableMemo<OutputType> {
             return this.baseFunction();
         }
 
-        if(map.containsValue(this.getValue())) return (OutputType) map.get(this.getValue());
+        if(map.containsKey(this.getFibValue())) return (OutputType) map.get(this.getFibValue());
 
         // if this is NOT a base case, do what needs to be done to reduce the problem size
         // example: f(5) = f(4) + f(3) which is what will need to be returned!
@@ -49,7 +49,7 @@ public interface DivideAndConquerableMemo<OutputType> {
 
 
         // Before returning store values in HashMap
-        map.put(this.getValue(), recombine(intermediateResults));
+        map.put(this.getFibValue(), recombine(intermediateResults));
 
         // since it's not a base case, we need to return the recombination, i.e. f(4)+f(3), here IT IS the sum!
         return recombine(intermediateResults);

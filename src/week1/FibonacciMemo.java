@@ -23,14 +23,13 @@ public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMem
     }
 
     @Override
-    public Integer getValue() {
+    public Integer getFibValue() {
         return this.fibValue;
     }
 
     @Override
     public Integer baseFunction() {
-        if(this.isBasic()) return this.fibValue;
-        return null;
+        return this.fibValue;
     }
 
     @Override
