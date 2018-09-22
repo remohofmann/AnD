@@ -26,9 +26,9 @@ public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<
     @Override
     public List<? extends DivideAndConquerable<Integer>> decompose() {
         int tempV = this.fibValue.intValue();
-        List<FibonacciMemo<Integer>> decomposedList = new ArrayList<>();
-        decomposedList.add(new FibonacciMemo<Integer>(tempV - 1));
-        decomposedList.add(new FibonacciMemo<Integer>(tempV - 2));
+        List<FibonacciSimple<Integer>> decomposedList = new ArrayList<>();
+        decomposedList.add(new FibonacciSimple<Integer>(tempV - 1));
+        decomposedList.add(new FibonacciSimple<Integer>(tempV - 2));
         return decomposedList;
     }
 
