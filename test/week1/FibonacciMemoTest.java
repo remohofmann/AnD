@@ -18,51 +18,94 @@ public class FibonacciMemoTest {
     private FibonacciMemo<Integer> fiboSimple5 = new FibonacciMemo<Integer>(5);
     private FibonacciMemo<Integer> fiboSimple10 = new FibonacciMemo<Integer>(10);
 
-    private Map<DivideAndConquerable<Integer>, Integer> fibValMap = new HashMap<>();
-
-    @Test
-    public void isBasic() {
-        Assert.assertEquals(fiboSimple0.isBasic(), true);
-        Assert.assertEquals(fiboSimple1.isBasic(), true);
-        Assert.assertEquals(fiboSimple2.isBasic(), false);
-    }
-
-    @Test
-    public void baseFunction() {
-        Assert.assertEquals(fiboSimple3.divideAndConquer(fibValMap).intValue(), fiboSimple2.divideAndConquer(fibValMap).intValue() + fiboSimple1.divideAndConquer(fibValMap).intValue());
-        Assert.assertEquals(new FibonacciMemo<Integer>(20).divideAndConquer(fibValMap).intValue(), new FibonacciMemo<Integer>(19).divideAndConquer(fibValMap).intValue() + new FibonacciMemo<Integer>(18).divideAndConquer(fibValMap).intValue());
-    }
 
     @Test
     public void calculateFibonacciNumbers() {
-        Assert.assertEquals(fiboSimple0.divideAndConquer(fibValMap).intValue(), 0);
-        Assert.assertEquals(fiboSimple1.divideAndConquer(fibValMap).intValue(), 1);
-        Assert.assertEquals(fiboSimple2.divideAndConquer(fibValMap).intValue(), 1);
-        Assert.assertEquals(fiboSimple5.divideAndConquer(fibValMap).intValue(), 5);
-        Assert.assertEquals(fiboSimple10.divideAndConquer(fibValMap).intValue(), 55);
-        Assert.assertEquals(new FibonacciMemo<Integer>(21).divideAndConquer(fibValMap).intValue(), 10946);
-        Assert.assertEquals(new FibonacciMemo<Integer>(32).divideAndConquer(fibValMap).intValue(), 2178309);
-
         int l = 30;
-        for (int i = 0; i < l; i++) {
-            System.out.println(i + ": " + new FibonacciMemo<Integer>(i).divideAndConquer(fibValMap).intValue());
+        System.out.println("Fibonacci 10,11,12,...,30");
+        System.out.println("Fibonacci Simple");
+        long simpleStart = System.currentTimeMillis();
+        for (int i = 10; i < l; i++) {
+            System.out.print("f(" + i + ")=" + new FibonacciSimple<Integer>(i).divideAndConquer().intValue());
+            System.out.print(" ");
+        }
+        long simpleEnd = System.currentTimeMillis();
+        System.out.println();
+        System.out.println("Time: " + (simpleEnd - simpleStart));
+        System.out.println();
+        System.out.println("Fibonacci with Memo");
+        simpleStart = System.currentTimeMillis();
+        for (int i = 10; i < l; i++) {
+            HashMap fibValMap = new HashMap<>();
+            System.out.print("f(" + i + ")=" + new FibonacciMemo<Integer>(i).divideAndConquer(fibValMap).intValue());
+            System.out.print(" ");
+        }
+        simpleEnd = System.currentTimeMillis();
+        System.out.println();
+        System.out.println("Time: " + (simpleEnd - simpleStart));
+
+        // Measurements (1. number of Fibonacci numbers // 2. time)
+        HashMap simpleMap = new HashMap();
+        HashMap memoMap = new HashMap();
+
+        // specify maximum number of fibonacci numbers
+        // Simple
+        /*for (int j = 10; j <= 35; j = j + 5) {
+
+            System.out.println();
+            System.out.println("Simple");
+            int[] tmpSimpleArray = new int[j];
+
+            simpleStart = System.nanoTime();
+            for (int i = 0; i < j; i++) {
+                FibonacciSimple tempF = new FibonacciSimple(i);
+                tmpSimpleArray[i] = (int) tempF.divideAndConquer();
+            }
+            simpleEnd = System.nanoTime();
+
+            for (int i = 0; i < j; i++) {
+                System.out.print(i + "=" + tmpSimpleArray[i]);
+                System.out.print(" ");
+                System.out.print(" ");
+            }
+            // Add measurements to simpleMap
+            simpleMap.put(j, simpleEnd - simpleStart);
         }
 
-    }
 
-    @Test
-    public void recombine() {
-        FibonacciMemo<Integer> fibo5 = new FibonacciMemo<>(5);
-        FibonacciMemo<Integer> fibo6 = new FibonacciMemo<>(6);
-        FibonacciMemo<Integer> fibo7 = new FibonacciMemo<>(7);
-        List<Integer> recoList = new ArrayList<>(2);
-        recoList.add(fibo5.divideAndConquer(fibValMap).intValue());
-        recoList.add(fibo6.divideAndConquer(fibValMap).intValue());
-        Assert.assertEquals(new FibonacciMemo<Integer>(7).divideAndConquer(fibValMap).intValue(), fibo7.recombine(recoList).intValue());
-    }
+        // Memo
+        for (int j = 10; j <= 35; j = j + 5) {
+            System.out.println("\nMemo");
+            HashMap reusableFibonacciNumbers = new HashMap();
+            int[] tmpMemoArray = new int[j];
 
-    @After
-    public void printValMap(){
-        fibValMap.forEach((key, value) -> System.out.println(key.getFibValue().intValue() + ", " + value));
+            long memoStart = System.nanoTime();
+            for (int i = 0; i < j; i++) {
+                FibonacciMemo tempF = new FibonacciMemo(i);
+                tmpMemoArray[i] = (int) tempF.divideAndConquer(reusableFibonacciNumbers);
+            }
+            long memoEnd = System.nanoTime();
+
+            for (int i = 0; i < j; i++) {
+                System.out.print(i + "=" + tmpMemoArray[i]);
+                System.out.print(" ");
+                System.out.print(" ");
+            }
+            // Add measurements to memoMap
+            memoMap.put(j, memoEnd - memoStart);
+        }
+        // Print out measurements
+        // Simple
+        System.out.println();
+        System.out.println();
+        System.out.println("SimpleMap times");
+        System.out.println(simpleMap.toString());
+        System.out.println();
+
+        // Memo
+        System.out.println("Memo times");
+        System.out.println(memoMap.toString());*/
+
+
     }
 }

@@ -7,7 +7,6 @@ public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMem
 
     private Integer fibValue;
 
-
     public FibonacciMemo(Integer fibValue) {
         this.fibValue = fibValue;
     }
@@ -20,6 +19,11 @@ public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMem
     @Override
     public Integer baseFunction() {
         return this.fibValue;
+    }
+
+    @Override
+    public Integer getKey() {
+        return this.fibValue.intValue();
     }
 
     @Override
