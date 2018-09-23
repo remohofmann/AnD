@@ -32,7 +32,7 @@ public interface DivideAndConquerableThreads<OutputType> extends Runnable {
          * 3. switch to sequential processing! */
         subcomponents.forEach(subcomponent -> {
 //            TODO: check if there is still an available thread...
-            if (threadPoolExecutor.getActiveCount() < this.getMaxThreads()) {
+            if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize()) {
                 ThreadPoolExecutorTask threadPoolExecutorTask = new ThreadPoolExecutorTask(intermediateResults, subcomponent, threadPoolExecutor);
                 threadPoolExecutor.execute(threadPoolExecutorTask);
             }
