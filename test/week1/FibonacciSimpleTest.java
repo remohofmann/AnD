@@ -29,8 +29,8 @@ public class FibonacciSimpleTest {
 
     @Test
     public void baseFunction() {
-        //Assert.assertEquals(fiboSimple3.divideAndConquer().intValue(), fiboSimple2.divideAndConquer().intValue() + fiboSimple1.divideAndConquer().intValue());
-        //Assert.assertEquals(new FibonacciSimple<Integer>(20).divideAndConquer().intValue(), new FibonacciSimple<Integer>(19).divideAndConquer().intValue() + new FibonacciMemo<Integer>(18).divideAndConquer().intValue());
+        Assert.assertEquals(fiboSimple3.divideAndConquer().intValue(), fiboSimple2.divideAndConquer().intValue() + fiboSimple1.divideAndConquer().intValue());
+        Assert.assertEquals(new FibonacciSimple<Integer>(20).divideAndConquer().intValue(), new FibonacciSimple<Integer>(19).divideAndConquer().intValue() + new FibonacciSimple<Integer>(18).divideAndConquer().intValue());
     }
 
     @Test

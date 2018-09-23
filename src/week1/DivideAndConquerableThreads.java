@@ -2,55 +2,43 @@ package week1;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
-public interface DivideAndConquerableThreads<OutputType> {
+public interface DivideAndConquerableThreads<OutputType> extends Runnable {
 
-    // 4 basic methods to split the recursion into feasible smaller problems
-    /** fibonacci example:
-     * 1. do we have a base case? 'isBasic()'?
-     * 2. if yes, return its value 'baseFunction()'
-     * 3. if no, reduce case complexity, i.e. decompose()
-     * 4. & recombine(): f(5) = f(4) + f(3)
-     */
     boolean isBasic();
+    int getMaxThreads();
     OutputType baseFunction();
-    List<? extends DivideAndConquerableMemo<OutputType>> decompose();
+
+    List<? extends DivideAndConquerableThreads<OutputType>> decompose();
+
     OutputType recombine(List<OutputType> intermediateResults);
 
-    // what is this????
-    default List<? extends DivideAndConquerableMemo<OutputType>> stump() {
-        return new ArrayList<DivideAndConquerableMemo<OutputType>>(0);
+    default List<? extends DivideAndConquerableThreads<OutputType>> stump() {
+        return new ArrayList<DivideAndConquerableThreads<OutputType>>(0);
     }
 
-
     // DEFAULT divideAndConquer method which returns a type of 'OutputType'
-    // example: fibonacci will return an integer (i.e. 'int')
-    default OutputType divideAndConquer() {
-        // if 'this' is a basic case, return the 'basic result'
-        // example: fibonacci(1)=1, f(0)=0
+    default OutputType divideAndConquer(ThreadPoolExecutor threadPoolExecutor) {
         if (this.isBasic()) {
             return this.baseFunction();
         }
-
-        // if this is NOT a base case, do what needs to be done to reduce the problem size
-        // example: f(5) = f(4) + f(3) which is what will need to be returned!
-        // if the input is f(n), the output must be the list of [f(n-1), f(n-2)]
-        List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = this.decompose();
-
-        /** make a list of intermediate results
-         * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))
-         * that can be looked up later.
-         * -> avoid recalculating already calculated stuff!
-         * This is JUST a result list of the intermediate results! */
+        List<? extends DivideAndConquerableThreads<OutputType>> subcomponents = this.decompose();
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
-
-        // now add each subcomponent to the intermediateResults list
-        // here 'add' is NOT a sum!
-        // It ADDS the subcomponents to the list!
-
-        //subcomponents.forEach(subcomponent -> intermediateResults.add(subcomponent.divideAndConquer()));
-
-        // since it's not a base case, we need to return the recombination, i.e. f(4)+f(3), here IT IS the sum!
+        // TODO: threadpool comes here -> for each 'add' there should be a thread!
+        /** 1. assign each subcomponent.divideAndConquer() a thread. (or each add(subcomponent.divNC())?)
+         * 2. is threadPoolSize is reached, stop creating new threads,
+         * 3. switch to sequential processing! */
+        subcomponents.forEach(subcomponent -> {
+//            TODO: check if there is still an available thread...
+            if (threadPoolExecutor.getActiveCount() < this.getMaxThreads()) {
+                ThreadPoolExecutorTask threadPoolExecutorTask = new ThreadPoolExecutorTask(intermediateResults, subcomponent, threadPoolExecutor);
+                threadPoolExecutor.execute(threadPoolExecutorTask);
+            }
+            else intermediateResults.add(subcomponent.divideAndConquer(threadPoolExecutor));
+        });
         return recombine(intermediateResults);
     }
+
 }
