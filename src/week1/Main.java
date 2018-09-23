@@ -7,11 +7,11 @@ import java.util.HashMap;
 
 public class Main extends Application {
 
+    private static HashMap simpleMap = new HashMap();
+    private static HashMap memoMap = new HashMap();
 
     public static void main(String[] args) {
         // Measurements (1. number of Fibonacci numbers // 2. time)
-        HashMap simpleMap = new HashMap();
-        HashMap memoMap = new HashMap();
 
         // Rerun each method with different size
 
@@ -78,20 +78,17 @@ public class Main extends Application {
         System.out.println(memoMap.toString());
 
 
-
-
         launch(args);
-        }
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
             // Show Data
-           ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap);
-
-
+            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap);
+            viewDataController.showData(primaryStage);
             primaryStage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
