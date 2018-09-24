@@ -25,7 +25,7 @@ public class FibonacciThreadsTest {
         FibonacciThreads<Integer> fiboThreads = new FibonacciThreads<Integer>(fibo, (ThreadPoolExecutor) executorService, maxThreads);
         System.out.println("Starting threads...");
         System.out.println(fibo +" = "+ fiboThreads.divideAndConquer((ThreadPoolExecutor) executorService));
-        TimeUnit.SECONDS.sleep(2);
+//        TimeUnit.SECONDS.sleep(2);
         executorService.shutdown();
 //        executorService.awaitTermination(10, TimeUnit.MINUTES);
         do { // nothing

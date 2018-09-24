@@ -13,7 +13,7 @@ public class ThreadPoolExecutorTask<OutputType> implements Runnable {
     private static Lock lock = new ReentrantLock();
 
     public ThreadPoolExecutorTask(List<OutputType> intermediateResults,
-                                  DivideAndConquerableThreads subcomponent,
+                                  DivideAndConquerableThreads<OutputType> subcomponent,
                                   ThreadPoolExecutor threadPoolExecutor) {
         this.intermediateResults = intermediateResults;
         this.subcomponent = subcomponent;

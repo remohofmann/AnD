@@ -3,6 +3,7 @@ package week1;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public interface DivideAndConquerableThreads<OutputType> extends Runnable {
@@ -18,6 +19,7 @@ public interface DivideAndConquerableThreads<OutputType> extends Runnable {
     default List<? extends DivideAndConquerableThreads<OutputType>> stump() {
         return new ArrayList<DivideAndConquerableThreads<OutputType>>(0);
     }
+    ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
     // DEFAULT divideAndConquer method which returns a type of 'OutputType'
     default OutputType divideAndConquer(ThreadPoolExecutor threadPoolExecutor) {
@@ -32,9 +34,14 @@ public interface DivideAndConquerableThreads<OutputType> extends Runnable {
          * 3. switch to sequential processing! */
         subcomponents.forEach(subcomponent -> {
 //            TODO: check if there is still an available thread...
-            if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize()) {
-                ThreadPoolExecutorTask threadPoolExecutorTask = new ThreadPoolExecutorTask(intermediateResults, subcomponent, threadPoolExecutor);
-                threadPoolExecutor.execute(threadPoolExecutorTask);
+//            if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize()) {
+            if (executor.getPoolSize() < executor.getMaximumPoolSize()) {
+                executor.submit(() -> {
+                    intermediateResults.add(subcomponent.divideAndConquer(threadPoolExecutor));
+                    return null;
+                });
+//                ThreadPoolExecutorTask threadPoolExecutorTask = new ThreadPoolExecutorTask(intermediateResults, subcomponent, threadPoolExecutor);
+//                threadPoolExecutor.execute(threadPoolExecutorTask);
             }
             else intermediateResults.add(subcomponent.divideAndConquer(threadPoolExecutor));
         });
