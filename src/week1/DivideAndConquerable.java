@@ -27,7 +27,6 @@ public interface DivideAndConquerable<OutputType> {
         return new ArrayList<DivideAndConquerable<OutputType>>(0);
     }
 
-
     // DEFAULT divideAndConquer method which returns a type of 'OutputType'
     // example: fibonacci will return an integer (i.e. 'int')
     default OutputType divideAndConquer() {

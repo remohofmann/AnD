@@ -38,4 +38,6 @@ public class FibonacciSimple<I extends Integer> implements DivideAndConquerable<
         result += intermediateResults.stream().mapToInt(Integer::intValue).sum();
         return new Integer(result);
     }
+
+    /** The default method divideAndConquer() is only called in the test class in the main method! */
 }
