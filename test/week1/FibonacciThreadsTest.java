@@ -6,6 +6,7 @@ import org.junit.Test;
 import week1.exercices.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,13 +17,15 @@ import static org.junit.Assert.*;
 
 public class FibonacciThreadsTest {
 
-    @Test
+    private ExecutorService executorService;
+
+    /*@Test
     public void calculateFibonacciNumbers() throws InterruptedException {
         //TODO: compare computational time between normal and with threads
-        int fibo = 5;
+        int fibo = 10;
         int maxThreads = 10;
-        ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
-        FibonacciThreads<Integer> fiboThreads = new FibonacciThreads<Integer>(fibo, (ThreadPoolExecutor) executorService, maxThreads);
+        executorService = Executors.newFixedThreadPool(maxThreads);
+        FibonacciThreads<Integer> fiboThreads = new FibonacciThreads<Integer>(fibo, (ThreadPoolExecutor) executorService);
         System.out.println("Starting threads...");
         System.out.println(fibo +" = "+ fiboThreads.divideAndConquer((ThreadPoolExecutor) executorService));
 //        TimeUnit.SECONDS.sleep(2);
@@ -32,6 +35,35 @@ public class FibonacciThreadsTest {
         } while (!executorService.isTerminated());
         System.out.println("All threads finished");
 
+    }*/
+
+    @Test
+    public void FibonacciThreadsComparedToFibonacciSimpleTest() {
+        int s = 10;
+        int l = 35;
+        int maxThreads = 10;
+        executorService = Executors.newFixedThreadPool(maxThreads);
+        System.out.println("Fibonacci " + s + ",...," + l);
+        System.out.println("Fibonacci Simple");
+        long simpleStart = System.currentTimeMillis();
+        for (int i = s; i < l; i++) {
+            System.out.print("f(" + i + ")=" + new FibonacciThreads<Integer>(i, (ThreadPoolExecutor) executorService).divideAndConquer((ThreadPoolExecutor) executorService).intValue());
+            System.out.print(" ");
+        }
+        long simpleEnd = System.currentTimeMillis();
+        System.out.println();
+        System.out.println("Time: " + (simpleEnd - simpleStart) + " ms");
+        System.out.println();
+        System.out.println("Fibonacci with Threads");
+        simpleStart = System.currentTimeMillis();
+        for (int i = s; i < l; i++) {
+            HashMap fibValMap = new HashMap<>();
+            System.out.print("f(" + i + ")=" + new FibonacciThreads<Integer>(i, (ThreadPoolExecutor) executorService).divideAndConquer((ThreadPoolExecutor) executorService).intValue());
+            System.out.print(" ");
+        }
+        simpleEnd = System.currentTimeMillis();
+        System.out.println();
+        System.out.println("Time: " + (simpleEnd - simpleStart) +" ms");
     }
 
 
