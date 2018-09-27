@@ -1,11 +1,18 @@
 package week1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMemo<Integer> {
 
     private Integer fibValue;
+
+    private static HashMap fibonacciMap = new HashMap();
+
+    public HashMap getHashMap() {
+        return this.fibonacciMap;
+    }
 
 
     public FibonacciMemo(Integer fibValue) {
