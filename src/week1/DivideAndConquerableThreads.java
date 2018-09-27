@@ -1,5 +1,7 @@
 package week1;
 
+import sun.jvm.hotspot.oops.OopUtilities;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.*;
@@ -20,22 +22,29 @@ public interface DivideAndConquerableThreads<OutputType> extends DivideAndConque
          * 2. is threadPoolSize is reached, stop creating new threads,
          * 3. switch to sequential processing! */
         if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize() - 1) {
-            final FutureTask<OutputType> futureTask1;
-            final FutureTask<OutputType> futureTask2;
+            final FutureTask<OutputType>[] futureTasksArray = new FutureTask[subcomponents.size()];
             subcomponents.forEach(subcomponent -> {
                 // TODO: Callable & FutureTask!!!!
                 try {
-                    futureTask1 = new FutureTask<>(subcomponent);
-                    futureTask2 = new FutureTask<>(subcomponent);
-                    threadPoolExecutor.execute(futureTask1);
-                    threadPoolExecutor.execute(futureTask2);
+                    FutureTask<OutputType> futureTask = new FutureTask<>(subcomponent);
+                    for (int i = 0; i < subcomponents.size(); i++) {
+                        futureTasksArray[i] = futureTask;
+                        threadPoolExecutor.execute(futureTask);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
             // TODO : check if this is correctly executed for every case!
-            if (futureTask1.isDone()) intermediateResults.add(futureTask1.get());
-            if (futureTask2.isDone()) intermediateResults.add(futureTask2.get());
+            for (FutureTask<OutputType> futureTask : futureTasksArray)
+                try {
+                    intermediateResults.add(futureTask.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
         } else {
             subcomponents.forEach(subcomponent -> {
                 intermediateResults.add(subcomponent.divideAndConquer());
