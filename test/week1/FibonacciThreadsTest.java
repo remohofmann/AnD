@@ -58,6 +58,7 @@ public class FibonacciThreadsTest {
         simpleEnd = System.currentTimeMillis();
         System.out.println();
         System.out.println("Time: " + (simpleEnd - simpleStart) +" ms");
+        executorService.shutdown();
     }
 
 
