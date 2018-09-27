@@ -1,0 +1,8 @@
+AnD lessons learned
+
+1 - divide and conquer - Java
+    (1) README.TXT: muss Instruktionen zur Kompilation enthalten
+    (2) class-Dateien gehören nicht ins src-Verzeichnis, sondern ins bin-Verzeichnis (?)
+    (3) Code (wie vorgegeben) in Packages organisieren;
+    (4) Aufgabe GUT lesen: Unter-Interfaces sollten von DivideAndConquer erben!
+    (5) Eine kurze Schlussfolgerung aus den erzielten Performances festhalten.
