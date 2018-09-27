@@ -14,33 +14,15 @@ import static org.junit.Assert.*;
 
 public class FibonacciThreadsTest {
 
-    private ExecutorService executorService;
-
-    /*@Test
-    public void calculateFibonacciNumbers() throws InterruptedException {
-        //TODO: compare computational time between normal and with threads
-        int fibo = 10;
-        int maxThreads = 10;
-        executorService = Executors.newFixedThreadPool(maxThreads);
-        FibonacciThreads<Integer> fiboThreads = new FibonacciThreads<Integer>(fibo, (ThreadPoolExecutor) executorService);
-        System.out.println("Starting threads...");
-        System.out.println(fibo +" = "+ fiboThreads.divideAndConquer((ThreadPoolExecutor) executorService));
-//        TimeUnit.SECONDS.sleep(2);
-        executorService.shutdown();
-//        executorService.awaitTermination(10, TimeUnit.MINUTES);
-        do { // nothing
-        } while (!executorService.isTerminated());
-        System.out.println("All threads finished");
-
-    }*/
-
     @Test
     public void FibonacciComparedTest() throws ExecutionException, InterruptedException {
         int s = 10;
         int l = 35;
-        int maxThreads = 10;
-        executorService = Executors.newFixedThreadPool(maxThreads);
         System.out.println("Fibonacci " + s + ",...," + l);
+        int maxThreads = 100;
+        System.out.println("Max threads:  " + maxThreads);
+        System.out.println();
+        /** SIMPLE **********************************************************/
         System.out.println("Fibonacci Simple");
         long simpleStart = System.currentTimeMillis();
         for (int i = s; i < l; i++) {
@@ -51,6 +33,7 @@ public class FibonacciThreadsTest {
         System.out.println();
         System.out.println("Time: " + (simpleEnd - simpleStart) + " ms");
 
+        /** MEMO **********************************************************/
         System.out.println();
         System.out.println("Fibonacci with Memo");
         simpleStart = System.currentTimeMillis();
@@ -63,7 +46,8 @@ public class FibonacciThreadsTest {
         System.out.println();
         System.out.println("Time: " + (simpleEnd - simpleStart) +" ms");
 
-
+        /** THREADS **********************************************************/
+        ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
         System.out.println();
         System.out.println("Fibonacci with Threads");
         simpleStart = System.currentTimeMillis();
