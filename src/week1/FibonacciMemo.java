@@ -1,30 +1,20 @@
 package week1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMemo<Integer> {
 
-   //private static int[] = new int[10];
-    private int fibValue;
-    private static HashMap fibonacciMap = new HashMap();
+    private Integer fibValue;
 
-    public HashMap getHashMap() {
-        return this.fibonacciMap;
-    }
+
     public FibonacciMemo(Integer fibValue) {
         this.fibValue = fibValue;
     }
 
     @Override
     public boolean isBasic() {
-        return this.fibValue < 2;
-    }
-
-    @Override
-    public Integer getFibValue() {
-        return this.fibValue;
+        return this.fibValue.equals(new Integer(1)) || this.fibValue.equals(new Integer(0));
     }
 
     @Override
@@ -32,9 +22,13 @@ public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMem
         return this.fibValue;
     }
 
+    public Integer getKey() {
+        return this.fibValue.intValue();
+    }
+
     @Override
     public List<? extends DivideAndConquerableMemo<Integer>> decompose() {
-        int tempV = this.fibValue;
+        int tempV = this.fibValue.intValue();
         List<FibonacciMemo<Integer>> decomposedList = new ArrayList<>();
         decomposedList.add(new FibonacciMemo<Integer>(tempV - 1));
         decomposedList.add(new FibonacciMemo<Integer>(tempV - 2));

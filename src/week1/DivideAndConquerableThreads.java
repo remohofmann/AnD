@@ -1,56 +1,56 @@
 package week1;
 
+import sun.jvm.hotspot.oops.OopUtilities;
+
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.*;
 
-public interface DivideAndConquerableThreads<OutputType> {
-
-    // 4 basic methods to split the recursion into feasible smaller problems
-    /** fibonacci example:
-     * 1. do we have a base case? 'isBasic()'?
-     * 2. if yes, return its value 'baseFunction()'
-     * 3. if no, reduce case complexity, i.e. decompose()
-     * 4. & recombine(): f(5) = f(4) + f(3)
-     */
-    boolean isBasic();
-    OutputType baseFunction();
-    List<? extends DivideAndConquerableMemo<OutputType>> decompose();
-    OutputType recombine(List<OutputType> intermediateResults);
-
-    // what is this????
-    default List<? extends DivideAndConquerableMemo<OutputType>> stump() {
-        return new ArrayList<DivideAndConquerableMemo<OutputType>>(0);
-    }
+public interface DivideAndConquerableThreads<OutputType> extends DivideAndConquerable<OutputType>, Callable<OutputType> {
 
 
     // DEFAULT divideAndConquer method which returns a type of 'OutputType'
-    // example: fibonacci will return an integer (i.e. 'int')
-    default OutputType divideAndConquer() {
-        // if 'this' is a basic case, return the 'basic result'
-        // example: fibonacci(1)=1, f(0)=0
+    default OutputType divideAndConquer(ThreadPoolExecutor threadPoolExecutor) throws ExecutionException, InterruptedException {
         if (this.isBasic()) {
             return this.baseFunction();
         }
-
-        // if this is NOT a base case, do what needs to be done to reduce the problem size
-        // example: f(5) = f(4) + f(3) which is what will need to be returned!
-        // if the input is f(n), the output must be the list of [f(n-1), f(n-2)]
-        List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = this.decompose();
-
-        /** make a list of intermediate results
-         * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))
-         * that can be looked up later.
-         * -> avoid recalculating already calculated stuff!
-         * This is JUST a result list of the intermediate results! */
+        List<? extends DivideAndConquerableThreads<OutputType>> subcomponents = (List<? extends DivideAndConquerableThreads<OutputType>>) this.decompose();
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
 
-        // now add each subcomponent to the intermediateResults list
-        // here 'add' is NOT a sum!
-        // It ADDS the subcomponents to the list!
+        // TODO: threadpool comes here -> for each 'add' there should be a thread!
+        /** 1. assign each subcomponent.divideAndConquer() a thread. (or each add(subcomponent.divNC())?)
+         * 2. is threadPoolSize is reached, stop creating new threads,
+         * 3. switch to sequential processing! */
+        if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize() - 1) {
+            final FutureTask<OutputType>[] futureTasksArray = new FutureTask[subcomponents.size()];
+            subcomponents.forEach(subcomponent -> {
+                // TODO: Callable & FutureTask!!!!
+                try {
+                    FutureTask<OutputType> futureTask = new FutureTask<>(subcomponent);
+                    for (int i = 0; i < subcomponents.size(); i++) {
+                        futureTasksArray[i] = futureTask;
+                        threadPoolExecutor.execute(futureTask);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            // TODO : check if this is correctly executed for every case!
+            for (FutureTask<OutputType> futureTask : futureTasksArray)
+                try {
+                    intermediateResults.add(futureTask.get());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
 
-        //subcomponents.forEach(subcomponent -> intermediateResults.add(subcomponent.divideAndConquer()));
-
-        // since it's not a base case, we need to return the recombination, i.e. f(4)+f(3), here IT IS the sum!
+        } else {
+            subcomponents.forEach(subcomponent -> {
+                intermediateResults.add(subcomponent.divideAndConquer());
+            });
+        }
         return recombine(intermediateResults);
     }
+
 }

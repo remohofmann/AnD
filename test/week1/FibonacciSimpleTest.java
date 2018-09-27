@@ -1,7 +1,6 @@
 package week1;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,9 +15,6 @@ public class FibonacciSimpleTest {
     private FibonacciSimple<Integer> fiboSimple5 = new FibonacciSimple<Integer>(5);
     private FibonacciSimple<Integer> fiboSimple10 = new FibonacciSimple<Integer>(10);
 
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     public void isBasic() {
@@ -29,8 +25,8 @@ public class FibonacciSimpleTest {
 
     @Test
     public void baseFunction() {
-        //Assert.assertEquals(fiboSimple3.divideAndConquer().intValue(), fiboSimple2.divideAndConquer().intValue() + fiboSimple1.divideAndConquer().intValue());
-        //Assert.assertEquals(new FibonacciSimple<Integer>(20).divideAndConquer().intValue(), new FibonacciSimple<Integer>(19).divideAndConquer().intValue() + new FibonacciMemo<Integer>(18).divideAndConquer().intValue());
+        Assert.assertEquals(fiboSimple3.divideAndConquer().intValue(), fiboSimple2.divideAndConquer().intValue() + fiboSimple1.divideAndConquer().intValue());
+        Assert.assertEquals(new FibonacciSimple<Integer>(20).divideAndConquer().intValue(), new FibonacciSimple<Integer>(19).divideAndConquer().intValue() + new FibonacciSimple<Integer>(18).divideAndConquer().intValue());
     }
 
     @Test
