@@ -22,32 +22,32 @@ public interface DivideAndConquerableThreads<OutputType> extends DivideAndConque
          * 2. is threadPoolSize is reached, stop creating new threads,
          * 3. switch to sequential processing! */
         if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize() - 1) {
-            final FutureTask<OutputType>[] futureTasksArray = new FutureTask[subcomponents.size()];
+            final List<FutureTask<OutputType>> futureTasksList = new ArrayList<>(subcomponents.size());
             subcomponents.forEach(subcomponent -> {
                 // TODO: Callable & FutureTask!!!!
                 try {
                     FutureTask<OutputType> futureTask = new FutureTask<>(subcomponent);
                     for (int i = 0; i < subcomponents.size(); i++) {
-                        futureTasksArray[i] = futureTask;
+                        futureTasksList.add(futureTask);
                         threadPoolExecutor.execute(futureTask);
+//                        System.out.println(threadPoolExecutor.getPoolSize() + ": " + threadPoolExecutor.getMaximumPoolSize());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
-            // TODO : check if this is correctly executed for every case!
-            for (FutureTask<OutputType> futureTask : futureTasksArray)
+            // adds the result of the thread calculation to the intermediateResults.
+            for (FutureTask<OutputType> futureTask : futureTasksList)
                 try {
                     intermediateResults.add(futureTask.get());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
 
         } else {
             subcomponents.forEach(subcomponent -> {
                 intermediateResults.add(subcomponent.divideAndConquer());
+//                System.out.println("outside threads...");
             });
         }
         return recombine(intermediateResults);
