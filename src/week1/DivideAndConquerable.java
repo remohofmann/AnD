@@ -4,22 +4,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public interface DivideAndConquerable<OutputType> {
-
     // 4 basic methods to split the recursion into feasible smaller problems
-
-    /**
-     * fibonacci example:
+    /** fibonacci example:
      * 1. do we have a base case? 'isBasic()'?
      * 2. if yes, return its value 'baseFunction()'
      * 3. if no, reduce case complexity, i.e. decompose()
-     * 4. & recombine(): f(5) = f(4) + f(3)
-     */
+     * 4. & recombine(): f(5) = f(4) + f(3)*/
     boolean isBasic();
-
     OutputType baseFunction();
-
     List<? extends DivideAndConquerable<OutputType>> decompose();
-
     OutputType recombine(List<OutputType> intermediateResults);
 
     // what is this????
