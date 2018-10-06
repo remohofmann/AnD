@@ -5,18 +5,12 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Random;
-import java.util.TreeMap;
 
-public class MergeSortMain extends Application {
+public class MergeSortTest extends Application {
 
     private static HashMap simpleMap = new HashMap();
 
     public static void main(String[] args) {
-     /*   System.out.println("7/2 = " + 7 / 2);
-        System.out.println("7.0/2.0 = " + 7.0 / 2.0);
-        System.out.println("7/2.0 = " + 7 / 2.0);
-        System.out.println("7.0/2 = " + 7.0 / 2);*/
-
 
         Random random = new Random();
         int max = 50;
