@@ -2,9 +2,9 @@ package ex5_mergesort;
 
 import java.util.Comparator;
 
-public class MergeSort<E> {
+public interface MergeSort<E> {
 
-    public void mergesortImpl(Object[] data, Object[] aux, int left, int right, Comparator<? super E> sorter) {
+    default void mergesortImpl(Object[] data, Object[] aux, int left, int right, Comparator<? super E> sorter) {
         /**
          * EXPLANATION
          * Object[] data: input to sort / sorted
@@ -16,11 +16,11 @@ public class MergeSort<E> {
         if (left < right) {                     // else input data size is 1 (no sort)
             int mid = (left + right) / 2;
             int i = left;                       // sorted left-half start
-            int j = mid + 1;                    // sorted right-half start
             int k = left;                       // sorted merged-halves start
-            mergesortImpl(data, aux, left, mid, sorter);            // l-DnC
-            mergesortImpl(data, aux, mid + 1, right, sorter);       // r-DnC
-            while (i <= mid && j <= right) {                        // l-r-merge left & right
+            int j = mid + 1;                    // sorted right-half start
+            mergesortImpl(data, aux, left, mid, sorter);            // left-DnC
+            mergesortImpl(data, aux, mid + 1, right, sorter);       // right-DnC
+            while (i <= mid && j <= right) {                        // left-right-merge left & right
                 if (sorter.compare((E) data[i], (E) data[j]) < 0)
                     aux[k++] = data[i++];
                 else
