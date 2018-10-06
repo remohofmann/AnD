@@ -15,9 +15,9 @@ public interface MergeSortInterface<E> {
          * */
         if (left < right) {                                         // else input data size is 1 (no sort)
             int i = left;                                           // sorted left-half start
-            int k = left;                                           // sorted merged-halves start
-            int mid = (left + right) / 2;
+            int mid = (left + right) / 2;                           // middle of provided array
             int j = mid + 1;                                        // sorted right-half start
+            int k = left;                                           // sorted merged-halves start
             mergesortImpl(data, aux, left, mid, sorter);            // left-DnC
             mergesortImpl(data, aux, mid + 1, right, sorter);       // right-DnC
             while (i <= mid && j <= right) {                        // left-right-merge left & right

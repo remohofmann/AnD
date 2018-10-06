@@ -13,10 +13,12 @@ public class MergeSortTest extends Application {
     public static void main(String[] args) {
 
         Random random = new Random();
-        int max = 50;
+        // set biggest array size (*1000)
+        int max = 50;               // numbers of arrays
+        int multiple = 1000;        // each time we'll increase the array size by 'multiple'
         for (int j = 1; j < max + 1; j++) {
 
-            int arraySize = j * 100;
+            int arraySize = j * multiple;
             Integer[] integers = new Integer[arraySize];
             for (int i = 0; i < arraySize; i++) {
                 integers[i] = new Integer(random.nextInt(5 * arraySize));
