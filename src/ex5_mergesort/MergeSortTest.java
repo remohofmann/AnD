@@ -21,7 +21,7 @@ public class MergeSortTest extends Application {
             int arraySize = j * increase;
             Integer[] integers = new Integer[arraySize];
             for (int i = 0; i < arraySize; i++) {
-                integers[i] = new Integer(random.nextInt(5 * arraySize));
+                integers[i] = random.nextInt(5 * arraySize);
             }
 
             IntegerMergeSort integerMergeSort = new IntegerMergeSort(integers);

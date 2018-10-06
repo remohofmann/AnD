@@ -16,7 +16,7 @@ public class IntegerMergeSort implements MergeSortInterface<Integer> {
     public String toString() {
         int[] array = new int[dataArray.length];
         for (int i = 0; i < array.length; i++) {
-            array[i] = dataArray[i].intValue();
+            array[i] = dataArray[i];
         }
         return Arrays.toString(array);
     }
