@@ -13,30 +13,30 @@ public class MergeSortTest extends Application {
     public static void main(String[] args) {
 
         Random random = new Random();
-        // set biggest array size (*1000)
-        int max = 50;               // numbers of arrays
-        int multiple = 1000;        // each time we'll increase the array size by 'multiple'
+        IntegerComparator sorter = new IntegerComparator();
+        int max = 20;              // numbers of arrays
+        int increase = 100;        // each time we'll increase the array size by 'multiple'
         for (int j = 1; j < max + 1; j++) {
 
-            int arraySize = j * multiple;
+            int arraySize = j * increase;
             Integer[] integers = new Integer[arraySize];
             for (int i = 0; i < arraySize; i++) {
                 integers[i] = new Integer(random.nextInt(5 * arraySize));
             }
 
-            MergeSort mergeSort = new MergeSort(integers);
+            IntegerMergeSort integerMergeSort = new IntegerMergeSort(integers);
 
 //            System.out.println("Array Size = " + arraySize);
-//            System.out.println("Before: " + mergeSort);
+//            System.out.println("Before: " + integerMergeSort);
 
             long simpleStart = System.nanoTime();
 
-            mergeSort.mergesortImpl(mergeSort.getDataArray(), mergeSort.getAuxArray(), 0, mergeSort.getDataArray().length - 1, new IntegerComparator());
+            integerMergeSort.sort(sorter);
 
             long duration = System.nanoTime() - simpleStart;
             simpleMap.put(arraySize, duration);
 
-//            System.out.println("After: " + mergeSort);
+//            System.out.println("After: " + integerMergeSort);
 //            System.out.println();
         }
         // sort the simpleMap

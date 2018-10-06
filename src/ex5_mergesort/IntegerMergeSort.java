@@ -2,12 +2,12 @@ package ex5_mergesort;
 
 import java.util.Arrays;
 
-public class MergeSort implements MergeSortInterface<Integer> {
+public class IntegerMergeSort implements MergeSortInterface<Integer> {
 
     private Integer[] dataArray;
     private Integer[] auxArray;
 
-    public MergeSort(Integer[] dataArray) {
+    public IntegerMergeSort(Integer[] dataArray) {
         this.dataArray = dataArray;
         this.auxArray = new Integer[dataArray.length];
     }
@@ -21,6 +21,8 @@ public class MergeSort implements MergeSortInterface<Integer> {
         return Arrays.toString(array);
     }
 
-    public Integer[] getDataArray(){return this.dataArray;}
-    public Integer[] getAuxArray(){return this.auxArray;}
+    public void sort(IntegerComparator sorter){
+        this.mergesortImpl(dataArray, auxArray, 0, dataArray.length-1, sorter);
+    }
+
 }
