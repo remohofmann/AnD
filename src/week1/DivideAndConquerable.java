@@ -38,7 +38,7 @@ public interface DivideAndConquerable<OutputType> {
          * splitting f(5) into f(4) and f(3) makes a list of the results (i.e. f(4) and f(3))
          * that can be looked up later.
          * -> avoid recalculating already calculated stuff!
-         * This is JUST a result list of the intermediate results! */
+         * This is JUST a result list of the intermediate results!*/
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
 
         // now add each subcomponent to the intermediateResults list

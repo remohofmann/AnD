@@ -1,16 +1,11 @@
 package week1;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import week1.exercices.Task;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.concurrent.*;
-
-import static org.junit.Assert.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class FibonacciThreadsTest {
 
