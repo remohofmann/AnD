@@ -15,29 +15,30 @@ public class MergeSortTest extends Application {
         Random random = new Random();
         IntegerComparator sorter = new IntegerComparator();
         int max = 20;              // numbers of arrays
-        int increase = 100;        // each time we'll increase the array size by 'multiple'
+        int increase = 10;        // each time we'll increase the array size by 'multiple'
         for (int j = 1; j < max + 1; j++) {
 
             int arraySize = j * increase;
-            Integer[] integers = new Integer[arraySize];
+            Integer[] dataArray = new Integer[arraySize];
+            Integer[] auxArray = new Integer[arraySize];
             for (int i = 0; i < arraySize; i++) {
-                integers[i] = random.nextInt(5 * arraySize);
+                dataArray[i] = random.nextInt(5 * arraySize);
             }
 
-            IntegerMergeSort integerMergeSort = new IntegerMergeSort(integers);
+            MergeSortInteger mergeSortInteger = new MergeSortInteger(dataArray, auxArray, 0, dataArray.length-1);
 
-//            System.out.println("Array Size = " + arraySize);
-//            System.out.println("Before: " + integerMergeSort);
+            System.out.println("Array Size = " + arraySize);
+            System.out.println("Before: " + mergeSortInteger);
 
             long simpleStart = System.nanoTime();
 
-            integerMergeSort.sort(sorter);
+            mergeSortInteger.divideAndConquer();
 
             long duration = System.nanoTime() - simpleStart;
             simpleMap.put(arraySize, duration);
 
-//            System.out.println("After: " + integerMergeSort);
-//            System.out.println();
+            System.out.println("After: " + mergeSortInteger);
+            System.out.println();
         }
         // sort the simpleMap
 //        TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(simpleMap);
