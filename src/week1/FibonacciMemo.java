@@ -7,17 +7,13 @@ import java.util.List;
 public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMemo<Integer> {
 
     private Integer fibValue;
-
     private static HashMap fibonacciMap = new HashMap();
-
-    public HashMap getHashMap() {
-        return this.fibonacciMap;
-    }
 
 
     public FibonacciMemo(Integer fibValue) {
         this.fibValue = fibValue;
     }
+
 
     @Override
     public boolean isBasic() {
@@ -47,5 +43,9 @@ public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMem
         int result = 0;
         result += intermediateResults.stream().mapToInt(Integer::intValue).sum();
         return new Integer(result);
+    }
+
+    public HashMap getHashMap() {
+        return this.fibonacciMap;
     }
 }

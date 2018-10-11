@@ -1,6 +1,5 @@
 package ex5_mergesort;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -15,18 +14,12 @@ import java.util.TreeMap;
 public class VisualizeData  {
 
     private HashMap simpleMap;
-    private HashMap memoMap;
-    private HashMap threadMap;
+    private HashMap threadsMap;
 
-    public VisualizeData(HashMap simpleMap, HashMap memoMap, HashMap threadMap) {
-        this.simpleMap = simpleMap;
-        this.memoMap = memoMap;
-        this.threadMap = memoMap;
-    }
 
-    public VisualizeData(HashMap simpleMap, HashMap memoMap) {
+    public VisualizeData(HashMap simpleMap, HashMap threadsMap) {
         this.simpleMap = simpleMap;
-        this.memoMap = memoMap;
+        this.threadsMap = threadsMap;
     }
 
     public VisualizeData(HashMap simpleMap) {
@@ -36,7 +29,7 @@ public class VisualizeData  {
     public Stage showData(Stage primaryStage) {
         // Sort Maps
         TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
-//        TreeMap<Integer, Integer> memoTreeMap = new TreeMap<Integer, Integer>(this.memoMap);
+        TreeMap<Integer, Integer> threadsTreeMap = new TreeMap<Integer, Integer>(this.threadsMap);
 
         primaryStage.setTitle("Merge Sort Algorithms");
 
@@ -55,18 +48,18 @@ public class VisualizeData  {
             simpleSeries.getData().add(new XYChart.Data(key, this.simpleMap.get(key)));
         }
 
-        /*XYChart.Series memoSeries = new XYChart.Series();
-        Set<Integer> memoKeys = memoTreeMap.keySet();
+        XYChart.Series threadsSeries = new XYChart.Series();
+        Set<Integer> memoKeys = threadsTreeMap.keySet();
         for (Integer key : memoKeys) {
-            memoSeries.getData().add(new XYChart.Data(key, this.memoMap.get(key)));
-        }*/
+            threadsSeries.getData().add(new XYChart.Data(key, this.threadsMap.get(key)));
+        }
 
         simpleSeries.setName("Simple");
-//        memoSeries.setName("Memoization");
+        threadsSeries.setName("Threads");
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(simpleSeries);
-//        lineChart.getData().add(memoSeries);
+        lineChart.getData().add(threadsSeries);
 
         primaryStage.setScene(scene);
         return primaryStage;
