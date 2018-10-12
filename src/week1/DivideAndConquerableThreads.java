@@ -1,11 +1,9 @@
 package week1;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.ArrayList;
+import java.util.concurrent.*;
 
 public interface DivideAndConquerableThreads<OutputType> extends DivideAndConquerable<OutputType>, Callable<OutputType> {
 

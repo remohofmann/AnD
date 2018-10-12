@@ -17,7 +17,7 @@ public class Main extends Application {
 
         // specify maximum number of fibonumbers
         // Simple
-        for (int j = 10; j <= 35; j = j + 5) {
+        for (int j = 1; j <= 25; j = j + 2) {
 
             System.out.println();
             System.out.println("Simple");
@@ -40,7 +40,7 @@ public class Main extends Application {
 
 
         // Memo
-        for (int j = 10; j <= 35; j = j + 5) {
+        for (int j = 1; j <= 25; j = j + 2) {
             System.out.println("\nMemo");
             int[] tmpMemoArray = new int[j];
 
@@ -48,10 +48,6 @@ public class Main extends Application {
             for (int i = 0; i < j; i++) {
                 FibonacciMemo tempF = new FibonacciMemo(i);
                 tmpMemoArray[i] = (int) tempF.divideAndConquer(tempF.getHashMap());
-
-                // Check if Hashmap of memoFibonacci contains something     !!!! Delete this line after everything works!!!!!!!!!
-//                System.out.println("\n" + tempF.getHashMap().toString());
-
             }
             long memoEnd = System.nanoTime();
 
@@ -60,8 +56,9 @@ public class Main extends Application {
             }
 
 
-            // Add measurements to memoMap
-            memoMap.put(j, memoEnd - memoStart);
+
+                // Add measurements to memoMap
+                memoMap.put(j, memoEnd - memoStart);
 
 
         }

@@ -10,12 +10,14 @@ public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerab
     OutputType getKey();
 
 
+
     // NEW divideAncConquer method with a parameter. Map is of form Map<ID, value>
     default OutputType divideAndConquer(Map<OutputType, OutputType> computedFiboValuesMap) {
         if (this.isBasic()) {
             return this.baseFunction();
         }
 
+        // Return Value of an Index (key) if this Index exists in Map
         if (computedFiboValuesMap.containsKey(this.getKey())) return computedFiboValuesMap.get(this.getKey());
 
         List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = (List<? extends DivideAndConquerableMemo<OutputType>>) this.decompose();

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class FibonacciMemo<I extends Integer> implements DivideAndConquerableMemo<Integer> {
 
+    // index of Fibonacci Value in Fibonacci row
     private Integer fibValue;
     private static HashMap fibonacciMap = new HashMap();
 
