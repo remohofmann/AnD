@@ -19,9 +19,9 @@ public class MergeSortTest extends Application {
 
         Random random = new Random();
         IntegerComparator sorter = new IntegerComparator();
-        int max = 20;              // numbers of arrays
-        int increase = 100;        // each time we'll increase the array size by 'multiple'
-        int maxThreads = 100;
+        int max = 200;              // numbers of arrays
+        int increase = 2;        // each time we'll increase the array size by 'multiple'
+        int maxThreads = 2;     // = number of cores
 
         ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
 
