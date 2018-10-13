@@ -1,8 +1,7 @@
 package week1;
 
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 public interface DivideAndConquerableThreads<OutputType> extends DivideAndConquerable<OutputType>, Callable<OutputType> {
@@ -21,23 +20,26 @@ public interface DivideAndConquerableThreads<OutputType> extends DivideAndConque
          * 2. is threadPoolSize is reached, stop creating new threads,
          * 3. switch to sequential processing! */
         if (threadPoolExecutor.getPoolSize() < threadPoolExecutor.getMaximumPoolSize() - 1) {
-            final FutureTask<OutputType>[] futureTasksArray = new FutureTask[subcomponents.size()];
+            List<Future<OutputType>> futures = new ArrayList<>();
             subcomponents.forEach(subcomponent -> {
-                // TODO: Callable & FutureTask!!!!
                 try {
-                    FutureTask<OutputType> futureTask = new FutureTask<>(subcomponent);
-                    for (int i = 0; i < subcomponents.size(); i++) {
-                        futureTasksArray[i] = futureTask;
-                        threadPoolExecutor.execute(futureTask);
-                    }
+                    Callable<OutputType> concurrentCode = () -> subcomponent.divideAndConquer(threadPoolExecutor);
+                    Future<OutputType> future = threadPoolExecutor.submit(concurrentCode);
+                    futures.add(future);
+                   /* for (int i = 0; i < subcomponents.size(); i++) {
+                        threadPoolExecutor.execute(future);
+                    }*/
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
+
+
             // TODO : check if this is correctly executed for every case!
-            for (FutureTask<OutputType> futureTask : futureTasksArray)
+            for (Future<OutputType> future : futures)
                 try {
-                    intermediateResults.add(futureTask.get());
+
+                    intermediateResults.add(future.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

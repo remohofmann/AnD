@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class FibonacciThreads<I extends Integer> implements DivideAndConquerableThreads<Integer>, Callable<Integer> {
+public class FibonacciThreads<I extends Integer> implements DivideAndConquerableThreads<Integer>/*, Callable<Integer>*/ {
 
     private Integer fibValue;
     private ThreadPoolExecutor executorService;
