@@ -50,14 +50,9 @@ public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerabl
 
     @Override
     public Integer baseFunction() {
-        if(dataArray.length<this.boundary) {
-            System.out.println("----------InsertionSort Started----------");
-            this.insertionSortImpl(new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o1-o2;
-                }
-            });
+        if(this.left+this.boundary>=this.right) {
+//            System.out.println("----------InsertionSort Started----------");
+            this.insertionSortImpl(sorter);
         }
         return null;
     }

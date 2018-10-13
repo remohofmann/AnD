@@ -15,14 +15,14 @@ public class MergeSortTest extends Application {
     private static HashMap simpleMap = new HashMap();
     private static HashMap threadsMap = new HashMap();
     private static HashMap threadsInsertionMap = new HashMap();
-    private static int boundary = 5; // boundary from where algorithm will switch to insertionsort
+    private static int boundary = 10; // boundary from where algorithm will switch to insertionsort
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         Random random = new Random();
         IntegerComparator sorter = new IntegerComparator();
-        int numberOfTests = 10;              // number of tests
-        int initialArraySize = 100;        // increase Arraysize with this value
+        int numberOfTests = 30;              // number of tests
+        int initialArraySize = 10;        // increase Arraysize with this value
         int maxThreads = 4;     // = number of cores
 
         ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
@@ -101,7 +101,7 @@ public class MergeSortTest extends Application {
     public void start(Stage primaryStage) {
         try {
             // Show Data
-            VisualizeData visualizeData = new VisualizeData(simpleMap, threadsMap, threadsInsertionMap, this.boundary);
+            VisualizeData visualizeData = new VisualizeData(simpleMap, threadsMap, threadsInsertionMap, boundary);
             visualizeData.showData(primaryStage).show();
         } catch (Exception e) {
             e.printStackTrace();
