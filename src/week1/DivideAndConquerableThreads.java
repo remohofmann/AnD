@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-public interface DivideAndConquerableThreads<OutputType> extends DivideAndConquerable<OutputType>, Callable<OutputType> {
+public interface DivideAndConquerableThreads<OutputType> extends DivideAndConquerable<OutputType> {
 
 
     // DEFAULT divideAndConquer method which returns a type of 'OutputType'
@@ -26,9 +26,6 @@ public interface DivideAndConquerableThreads<OutputType> extends DivideAndConque
                     Callable<OutputType> concurrentCode = () -> subcomponent.divideAndConquer(threadPoolExecutor);
                     Future<OutputType> future = threadPoolExecutor.submit(concurrentCode);
                     futures.add(future);
-                   /* for (int i = 0; i < subcomponents.size(); i++) {
-                        threadPoolExecutor.execute(future);
-                    }*/
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

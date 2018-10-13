@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class FibonacciThreads<I extends Integer> implements DivideAndConquerableThreads<Integer>/*, Callable<Integer>*/ {
+public class FibonacciThreads<I extends Integer> implements DivideAndConquerableThreads<Integer> {
 
     private Integer fibValue;
     private ThreadPoolExecutor executorService;
@@ -41,11 +41,6 @@ public class FibonacciThreads<I extends Integer> implements DivideAndConquerable
         int result = 0;
         result += intermediateResults.stream().mapToInt(Integer::intValue).sum();
         return new Integer(result);
-    }
-
-    @Override
-    public Integer call() throws Exception {
-        return this.divideAndConquer(executorService);
     }
 
 }
