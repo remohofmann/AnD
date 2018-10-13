@@ -16,14 +16,15 @@ public class VisualizeData  {
     private HashMap simpleMap;
     private HashMap threadsMap;
     private HashMap threadsInsertionMap;
-    private int boundary;
+    private int boundary, average;
 
 
-    public VisualizeData(HashMap simpleMap, HashMap threadsMap, HashMap threadsInsertionMap, int boundary) {
+    public VisualizeData(HashMap simpleMap, HashMap threadsMap, HashMap threadsInsertionMap, int boundary, int average) {
         this.simpleMap = simpleMap;
         this.threadsMap = threadsMap;
         this.threadsInsertionMap = threadsInsertionMap;
         this.boundary = boundary;
+        this.average = average;
     }
 
     public VisualizeData(HashMap simpleMap) {
@@ -43,7 +44,7 @@ public class VisualizeData  {
         final NumberAxis yAxis = new NumberAxis();
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-        lineChart.setTitle("Merge Sort Data");
+        lineChart.setTitle("Merge Sort Data (avg: " + average + ")");
         xAxis.setLabel("Array Size");
         yAxis.setLabel("Computational Time [nano]");
 

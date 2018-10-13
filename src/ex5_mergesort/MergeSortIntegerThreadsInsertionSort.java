@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerableThreads<Integer>, Callable<Integer>, InsertionSortInterface {
+public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerableThreads<Integer>, InsertionSortInterface<Integer> {
 
     private static IntegerComparator sorter = new IntegerComparator();
     private Integer[] dataArray;
     private Integer[] auxArray;
+    // positions
     private int left;
     private int right;
     private int i, mid, j, k;
@@ -33,7 +34,6 @@ public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerabl
     }
 
 
-
     @Override
     public String toString() {
         int[] array = new int[dataArray.length];
@@ -45,18 +45,14 @@ public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerabl
 
     @Override
     public boolean isBasic() {
-        return left >= right;
+        return left + boundary >= right;
     }
 
     @Override
     public Integer baseFunction() {
-        if(this.left+this.boundary>=this.right) {
-//            System.out.println("----------InsertionSort Started----------");
-            this.insertionSortImpl(sorter);
-        }
+        this.insertionSortImpl(sorter);
         return null;
     }
-
 
 
     @Override
@@ -84,33 +80,25 @@ public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerabl
         return null;
     }
 
-
-
-
-    @Override
-    public Integer call() throws Exception {
-        return this.divideAndConquer(executorService);
-    }
-
     @Override
     public int getSize() {
-        return dataArray.length;
+        return right - left;
     }
 
     @Override
-    public Object read(int j) {
+    public Integer read(int j) {
         return dataArray[j];
     }
 
     @Override
     public void move(int i, int j) {
-        int tmp = this.dataArray[i];
+        Integer tmp = this.dataArray[i];
         this.dataArray[i] = this.dataArray[j];
         this.dataArray[j] = tmp;
     }
 
     @Override
-    public void put(int i, Object o) {
-        this.dataArray[i] = (int) o;
+    public void put(int i, Integer o) {
+        this.dataArray[i] = o;
     }
 }

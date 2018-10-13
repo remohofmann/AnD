@@ -20,7 +20,6 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
     private int i, mid, j, k;
 
     private ThreadPoolExecutor executorService;
-    private int boundary;
 
 
     public MergeSortIntegerThreads(Integer[] dataArray, Integer[] auxArray, int left, int right, ThreadPoolExecutor executorService) {
@@ -29,7 +28,6 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
         this.left = left;
         this.right = right;
         this.executorService = executorService;
-        this.boundary = boundary;
     }
 
 
