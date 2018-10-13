@@ -1,8 +1,8 @@
 package ex5_mergesort;
 
-import week1.DivideAndConquerable;
 import week1.DivideAndConquerableThreads;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Integer>, Callable<Integer>, InsertionSortInterface {
+public class MergeSortIntegerThreadsInsertionSort implements DivideAndConquerableThreads<Integer>, Callable<Integer>, InsertionSortInterface {
 
     private static IntegerComparator sorter = new IntegerComparator();
     private Integer[] dataArray;
@@ -23,7 +23,7 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
     private int boundary;
 
 
-    public MergeSortIntegerThreads(Integer[] dataArray, Integer[] auxArray, int left, int right, ThreadPoolExecutor executorService, int boundary) {
+    public MergeSortIntegerThreadsInsertionSort(Integer[] dataArray, Integer[] auxArray, int left, int right, ThreadPoolExecutor executorService, int boundary) {
         this.dataArray = dataArray;
         this.auxArray = auxArray;
         this.left = left;
@@ -50,7 +50,8 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
 
     @Override
     public Integer baseFunction() {
-        if(dataArray.length<boundary) {
+        if(dataArray.length<this.boundary) {
+            System.out.println("----------InsertionSort Started----------");
             this.insertionSortImpl(new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
@@ -70,8 +71,8 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
         this.mid = (left + right) / 2;
         this.j = mid + 1;
         this.k = left;
-        decomposedList.add(new MergeSortIntegerThreads(dataArray, auxArray, left, mid, executorService, boundary));
-        decomposedList.add(new MergeSortIntegerThreads(dataArray, auxArray, mid + 1, right, executorService, boundary));
+        decomposedList.add(new MergeSortIntegerThreadsInsertionSort(dataArray, auxArray, left, mid, executorService, boundary));
+        decomposedList.add(new MergeSortIntegerThreadsInsertionSort(dataArray, auxArray, mid + 1, right, executorService, boundary));
         return decomposedList;
     }
 

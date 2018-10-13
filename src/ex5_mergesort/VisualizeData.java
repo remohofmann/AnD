@@ -15,11 +15,14 @@ public class VisualizeData  {
 
     private HashMap simpleMap;
     private HashMap threadsMap;
+    private HashMap threadsInsertionMap;
+    private int boundary;
 
 
-    public VisualizeData(HashMap simpleMap, HashMap threadsMap) {
+    public VisualizeData(HashMap simpleMap, HashMap threadsMap, HashMap threadsInsertionMap, int boundary) {
         this.simpleMap = simpleMap;
         this.threadsMap = threadsMap;
+        this.threadsInsertionMap = threadsInsertionMap;
     }
 
     public VisualizeData(HashMap simpleMap) {
@@ -30,6 +33,8 @@ public class VisualizeData  {
         // Sort Maps
         TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
         TreeMap<Integer, Integer> threadsTreeMap = new TreeMap<Integer, Integer>(this.threadsMap);
+        TreeMap<Integer, Integer> threadsInsertionTreeMap = new TreeMap<Integer, Integer>(this.threadsInsertionMap);
+
 
         primaryStage.setTitle("Merge Sort Algorithms");
 
@@ -54,12 +59,19 @@ public class VisualizeData  {
             threadsSeries.getData().add(new XYChart.Data(key, this.threadsMap.get(key)));
         }
 
+        XYChart.Series threadInsertionSeries = new XYChart.Series();
+        Set<Integer> threadInsertionKeys = threadsInsertionTreeMap.keySet();
+        for (Integer key : threadInsertionKeys) {
+            threadInsertionSeries.getData().add(new XYChart.Data(key, this.threadsInsertionMap.get(key)));
+        }
         simpleSeries.setName("Simple");
         threadsSeries.setName("Threads");
+        threadInsertionSeries.setName("Threads/Insertion (Boundary =" + this.boundary + ")");
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(simpleSeries);
         lineChart.getData().add(threadsSeries);
+        lineChart.getData().add(threadInsertionSeries);
 
         primaryStage.setScene(scene);
         return primaryStage;
