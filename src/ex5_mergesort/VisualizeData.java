@@ -23,6 +23,7 @@ public class VisualizeData  {
         this.simpleMap = simpleMap;
         this.threadsMap = threadsMap;
         this.threadsInsertionMap = threadsInsertionMap;
+        this.boundary = boundary;
     }
 
     public VisualizeData(HashMap simpleMap) {
