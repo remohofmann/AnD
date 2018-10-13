@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Integer>, Callable<Integer> {
+public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Integer> {
 
     private static IntegerComparator sorter = new IntegerComparator();
     private Integer[] dataArray;
@@ -23,7 +23,7 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
     private int boundary;
 
 
-    public MergeSortIntegerThreads(Integer[] dataArray, Integer[] auxArray, int left, int right, ThreadPoolExecutor executorService, int boundary) {
+    public MergeSortIntegerThreads(Integer[] dataArray, Integer[] auxArray, int left, int right, ThreadPoolExecutor executorService) {
         this.dataArray = dataArray;
         this.auxArray = auxArray;
         this.left = left;
@@ -60,8 +60,8 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
         this.mid = (left + right) / 2;
         this.j = mid + 1;
         this.k = left;
-        decomposedList.add(new MergeSortIntegerThreads(dataArray, auxArray, left, mid, executorService, boundary));
-        decomposedList.add(new MergeSortIntegerThreads(dataArray, auxArray, mid + 1, right, executorService, boundary));
+        decomposedList.add(new MergeSortIntegerThreads(dataArray, auxArray, left, mid, executorService));
+        decomposedList.add(new MergeSortIntegerThreads(dataArray, auxArray, mid + 1, right, executorService));
         return decomposedList;
     }
 
@@ -78,9 +78,6 @@ public class MergeSortIntegerThreads implements DivideAndConquerableThreads<Inte
         return null;
     }
 
-    @Override
-    public Integer call() throws Exception {
-        return null;
-    }
+
 }
 

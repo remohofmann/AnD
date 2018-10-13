@@ -22,11 +22,11 @@ public class MergeSortTest extends Application {
         Random random = new Random();
 
         int numberOfTests = 30;              // number of tests
-        int initialArraySize = 10;        // increase Arraysize with this value
+        int initialArraySize = 100;        // increase Arraysize with this value
         int maxThreads = 4;     // = number of cores
         int averaging = 10;
 
-        ExecutorService executorServiceInsertion = Executors.newFixedThreadPool(maxThreads);
+
 
         for (int j = 1; j < numberOfTests + 1; j++) {
 
@@ -44,8 +44,6 @@ public class MergeSortTest extends Application {
                 dataArraySimple[i] = random.nextInt(5 * arraySize);
                 dataArrayThreads[i] = random.nextInt(5 * arraySize);
                 dataArrayThreadsInsertion[i] = random.nextInt(5 * arraySize);
-
-
             }
 
             // ***************************** SIMPLE ********************************************
@@ -63,7 +61,7 @@ public class MergeSortTest extends Application {
                 durationSimple = System.nanoTime() - simpleStart;
                 durationSimpleAverage = (durationSimpleAverage + durationSimple) / (i + 1);
             }
-            simpleMap.put(arraySize, durationSimple);
+            simpleMap.put(arraySize, durationSimpleAverage);
             System.out.println("After: " + mergeSortIntegerSimple);
             System.out.println();
 
@@ -74,7 +72,7 @@ public class MergeSortTest extends Application {
 
             ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
             MergeSortIntegerThreads mergeSortIntegerThreads = new MergeSortIntegerThreads(dataArrayThreads,
-                    auxArrayThreads, 0, dataArrayThreads.length - 1, (ThreadPoolExecutor) executorService, boundary);
+                    auxArrayThreads, 0, dataArrayThreads.length - 1, (ThreadPoolExecutor) executorService);
 
             System.out.println("THREADS Array Size = " + arraySize);
             System.out.println("Before: " + mergeSortIntegerThreads);
@@ -84,8 +82,8 @@ public class MergeSortTest extends Application {
                 mergeSortIntegerThreads.divideAndConquer((ThreadPoolExecutor) executorService);
                 threadsDuration = System.nanoTime() - threadsStart;
                 durationThreadsAverage = (durationThreadsAverage + threadsDuration) / (i + 1);
-                executorService.shutdown();
             }
+            executorService.shutdown();
 
             threadsMap.put(arraySize, durationThreadsAverage);
             executorService.shutdown();
@@ -93,21 +91,28 @@ public class MergeSortTest extends Application {
             System.out.println();
 
             // ***************************** THREADS WITH INSERTION SORT **************************
+            ExecutorService executorServiceInsertion = Executors.newFixedThreadPool(maxThreads);
             MergeSortIntegerThreadsInsertionSort mergeSortIntegerThreadsInsertionSort = new MergeSortIntegerThreadsInsertionSort(dataArrayThreadsInsertion,
                     auxArrayThreadsInsertion, 0, dataArrayThreadsInsertion.length - 1, (ThreadPoolExecutor) executorServiceInsertion, boundary);
 
             System.out.println("THREADS WITH INSERTION SORT Array Size = " + arraySize);
             System.out.println("Before: " + mergeSortIntegerThreadsInsertionSort);
-            long threadsStartInsertion = System.nanoTime();
-            mergeSortIntegerThreadsInsertionSort.divideAndConquer((ThreadPoolExecutor) executorServiceInsertion);
-            long threadsDurationInsertion = System.nanoTime() - threadsStartInsertion;
-            threadsInsertionMap.put(arraySize, threadsDurationInsertion);
+            long threadsStartInsertion;
+            long threadsDurationInsertion;
+            long threadsDurationInsertionAverage = 0;
+            for (int i = 0; i < averaging; i++) {
+                threadsStartInsertion = System.nanoTime();
+                mergeSortIntegerThreadsInsertionSort.divideAndConquer((ThreadPoolExecutor) executorServiceInsertion);
+                threadsDurationInsertion = System.nanoTime() - threadsStartInsertion;
+                threadsDurationInsertionAverage = (threadsDurationInsertionAverage + threadsDurationInsertion) / (i + 1);
+            }
+
+            executorServiceInsertion.shutdown();
+            threadsInsertionMap.put(arraySize, threadsDurationInsertionAverage);
             System.out.println("After: " + mergeSortIntegerThreadsInsertionSort);
             System.out.println();
 
         }
-
-        executorServiceInsertion.shutdown();
 
         launch(args);
     }
