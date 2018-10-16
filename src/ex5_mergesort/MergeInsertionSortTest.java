@@ -19,9 +19,8 @@ public class MergeInsertionSortTest extends Application {
     private static HashMap threadsMap = new HashMap();
     private static HashMap threadsInsertionMap = new HashMap();
 
-    private static int ARRAYSIZE = new Integer(100000);  //size of arrays to compare
+    private static int ARRAYSIZE =  Integer.valueOf(100000);  //size of arrays to compare
     private static int averaging = 10;
-    private static int boundary = 20;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
@@ -29,7 +28,7 @@ public class MergeInsertionSortTest extends Application {
 
         //int numberOfTests = 10;                 // number of tests per InsertionSort threshold
         int maxThreads = 10;                    // = number of cores
-        int maxThreshold = 20;                  // max length of InsertionSort subarray
+        int maxThreshold = 5000;                  // max length of InsertionSort subarray
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
         boolean printToConsole = false;
@@ -46,7 +45,7 @@ public class MergeInsertionSortTest extends Application {
             // ***************************** THREADS WITH INSERTION SORT **************************
             ExecutorService executorServiceInsertion = Executors.newFixedThreadPool(maxThreads);
             MergeSortIntegerThreadsInsertionSort mergeSortIntegerThreadsInsertionSort = new MergeSortIntegerThreadsInsertionSort(dataArrayThreadsInsertion,
-                    auxArrayThreadsInsertion, 0, dataArrayThreadsInsertion.length - 1, (ThreadPoolExecutor) executorServiceInsertion, boundary);
+                    auxArrayThreadsInsertion, 0, dataArrayThreadsInsertion.length - 1, (ThreadPoolExecutor) executorServiceInsertion, j);
 
             if (printToConsole) {
                 System.out.println("THREADS WITH INSERTION SORT Array Size = " + ARRAYSIZE);
@@ -64,7 +63,7 @@ public class MergeInsertionSortTest extends Application {
             }
 
             executorServiceInsertion.shutdown();
-            threadsInsertionMap.put(ARRAYSIZE, threadsDurationInsertionAverage);
+            threadsInsertionMap.put(j, threadsDurationInsertionAverage);
 
             if (printToConsole) {
                 System.out.println("After: " + mergeSortIntegerThreadsInsertionSort);
@@ -82,7 +81,7 @@ public class MergeInsertionSortTest extends Application {
     public void start(Stage primaryStage) {
         try {
             // Show Data
-            VisualizeData visualizeData = new VisualizeData(simpleMap, threadsMap, threadsInsertionMap, boundary, averaging);
+            VisualizeThresholds visualizeData = new VisualizeThresholds(threadsInsertionMap);
             visualizeData.showData(primaryStage).show();
         } catch (Exception e) {
             e.printStackTrace();
