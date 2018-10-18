@@ -10,7 +10,7 @@ public interface InsertionSortInterface<T> {
     void put(int i, T t);
 
     default void insertionSortImpl(Comparator sorter) {
-        if (getSize() > 1) {                                              // if the size is 2 or more, then it might be unordered
+        if (getSize() > 1) {                                              // if the size is 2 or more, then it might be unordered => sort!
             for (int j = 1; j < getSize(); j++) {                         // iterate from index j=1 to the far right
                 T value = read(j);                                        // read right element
                 int i = j - 1;                                            // define initial left position
