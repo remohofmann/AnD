@@ -19,7 +19,7 @@ public class MergeInsertionSortTest extends Application {
     private static HashMap threadsMap = new HashMap();
     private static HashMap threadsInsertionMap = new HashMap();
 
-    private static int ARRAYSIZE =  Integer.valueOf(100000);  //size of arrays to compare
+    private static int ARRAYSIZE = Integer.valueOf(100000);  //size of arrays to compare
     private static int averaging = 10;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -27,13 +27,13 @@ public class MergeInsertionSortTest extends Application {
         Random random = new Random();
 
         //int numberOfTests = 10;                 // number of tests per InsertionSort threshold
-        int maxThreads = 10;                    // = number of cores
-        int maxThreshold = 5000;                  // max length of InsertionSort subarray
+        int maxThreads = 2;                    // = number of cores
+        int maxThreshold = 10000;                  // max length of InsertionSort subarray
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
         boolean printToConsole = false;
 
-        for (int j = 1; j < maxThreshold + 1; j++) {
+        for (int j = 1; j < maxThreshold + 1; j = j + 100) {
             //construction of the number arrays
             Integer[] dataArrayThreadsInsertion = new Integer[ARRAYSIZE];
             Integer[] auxArrayThreadsInsertion = new Integer[ARRAYSIZE];
@@ -68,9 +68,9 @@ public class MergeInsertionSortTest extends Application {
             if (printToConsole) {
                 System.out.println("After: " + mergeSortIntegerThreadsInsertionSort);
                 System.out.println();
+                System.out.println("Threshold = " + j);
+                System.out.println(threadsDurationInsertionAverage + "\n");
             }
-            System.out.println("Threshold = " + j);
-            System.out.println(threadsDurationInsertionAverage  + "\n");
         }
 
         launch(args);

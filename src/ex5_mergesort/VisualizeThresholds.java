@@ -41,7 +41,7 @@ public class VisualizeThresholds {
             threadInsertionSeries.getData().add(new XYChart.Data(key, this.thresholdValues.get(key)));
         }
 
-        threadInsertionSeries.setName("Threshholdnumbers");
+        threadInsertionSeries.setName("Threshhold numbers");
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(threadInsertionSeries);
