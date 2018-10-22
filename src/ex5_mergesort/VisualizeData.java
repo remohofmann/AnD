@@ -16,6 +16,7 @@ public class VisualizeData  {
     private HashMap simpleMap;
     private HashMap threadsMap;
     private HashMap threadsInsertionMap;
+    private HashMap threadsMergeWithInsertionMap;
     private int boundary, average;
 
 
@@ -27,6 +28,11 @@ public class VisualizeData  {
         this.average = average;
     }
 
+    public VisualizeData(HashMap simpleMap, HashMap threadsMap, HashMap threadsInsertionMap, HashMap threadsMergeWithInsertionMap, int boundary, int average) {
+        this(simpleMap,threadsMap, threadsInsertionMap, boundary, average);
+        this.threadsMergeWithInsertionMap = threadsMergeWithInsertionMap;
+    }
+
     public VisualizeData(HashMap simpleMap) {
         this.simpleMap = simpleMap;
     }
@@ -36,6 +42,7 @@ public class VisualizeData  {
         TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
         TreeMap<Integer, Integer> threadsTreeMap = new TreeMap<Integer, Integer>(this.threadsMap);
         TreeMap<Integer, Integer> threadsInsertionTreeMap = new TreeMap<Integer, Integer>(this.threadsInsertionMap);
+        TreeMap<Integer, Integer> threadsMergeWithInsertionTreeMap = new TreeMap<Integer, Integer>(this.threadsMergeWithInsertionMap);
 
 
         primaryStage.setTitle("Merge Sort Algorithms");
@@ -66,14 +73,21 @@ public class VisualizeData  {
         for (Integer key : threadInsertionKeys) {
             threadInsertionSeries.getData().add(new XYChart.Data(key, this.threadsInsertionMap.get(key)));
         }
+        XYChart.Series threadMergeWithInsertionSeries = new XYChart.Series();
+        Set<Integer> threadMergeWithInsertionKeys = threadsMergeWithInsertionTreeMap.keySet();
+        for (Integer key : threadMergeWithInsertionKeys) {
+            threadMergeWithInsertionSeries.getData().add(new XYChart.Data(key, this.threadsMergeWithInsertionMap.get(key)));
+        }
         simpleSeries.setName("Simple");
         threadsSeries.setName("Threads");
         threadInsertionSeries.setName("Threads/Insertion (Boundary =" + this.boundary + ")");
+        threadMergeWithInsertionSeries.setName("Threads/Merge with insertion");
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(simpleSeries);
         lineChart.getData().add(threadsSeries);
         lineChart.getData().add(threadInsertionSeries);
+        lineChart.getData().add(threadMergeWithInsertionSeries);
 
         primaryStage.setScene(scene);
         return primaryStage;

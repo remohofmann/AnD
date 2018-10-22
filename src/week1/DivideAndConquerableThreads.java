@@ -35,7 +35,7 @@ public interface DivideAndConquerableThreads<OutputType> extends DivideAndConque
             // TODO : check if this is correctly executed for every case!
             for (Future<OutputType> future : futures)
                 try {
-// TODO: instead of waiting until future ends to get the value, check if it has ended and if not check the other one!
+                    // TODO: instead of waiting until future ends to get the value, check if it has ended and if not check the other one!
                     intermediateResults.add(future.get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
