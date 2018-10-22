@@ -23,8 +23,8 @@ public class MergeSortTest extends Application {
 
         Random random = new Random();
 
-        int numberOfTests = 1000;              // number of tests
-        int initialArraySize = 1000;        // increase Arraysize with this value
+        int numberOfTests = 100;              // number of tests
+        int initialArraySize = 100;        // increase Arraysize with this value
         int maxThreads = 4;     // = number of cores
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
