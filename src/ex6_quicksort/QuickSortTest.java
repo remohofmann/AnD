@@ -1,5 +1,6 @@
-package ex5_mergesort;
+package ex6_quicksort;
 
+import ex5_mergesort.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -10,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class MergeSortTest extends Application {
+public class QuickSortTest extends Application {
 
     private static HashMap simpleMap = new HashMap();
     private static HashMap threadsMap = new HashMap();
