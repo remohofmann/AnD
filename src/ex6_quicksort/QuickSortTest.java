@@ -16,15 +16,15 @@ public class QuickSortTest extends Application {
     private static HashMap threadsMap = new HashMap();
 
     private static int averaging = 10;
-    private static int maxThreads = 2;
+    private static int maxThreads = Runtime.getRuntime().availableProcessors();
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         Random random = new Random();
 
-        int numberOfTests = 200;              // number of tests
-        int initialArraySize = 1000;        // initial array size
-        int increaseArraySize = 1000;       // increase Arraysize by this value
+        int numberOfTests = 10;              // number of tests
+        int initialArraySize = 100;        // initial array size
+        int increaseArraySize = 100;       // increase Arraysize by this value
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
         boolean printToConsole = false;
