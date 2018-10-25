@@ -18,6 +18,7 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
         this.left = left;
         this.right = right;
     }
+    public QuickSortSimple(){}
 
     @Override
     public boolean isBasic() {
@@ -72,4 +73,15 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
     }
 
     public Integer[] getDataArray(){return this.dataArray;}
+
+    public QuickSortSimple copy(){
+        QuickSortSimple quickSortSimple = new QuickSortSimple();
+        quickSortSimple.left = this.left;
+        quickSortSimple.right = this.right;
+        quickSortSimple.dataArray = new Integer[this.dataArray.length];
+        for (int i=0 ; i < this.dataArray.length ; i++){
+            quickSortSimple.dataArray[i] = new Integer(this.dataArray[i]);
+        }
+        return quickSortSimple;
+    }
 }

@@ -3,6 +3,7 @@ package ex6_quicksort;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -18,13 +19,22 @@ public class QuickSortTest extends Application {
     private static int averaging = 10;
     private static int maxThreads = Runtime.getRuntime().availableProcessors();
 
+
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         Random random = new Random();
 
-        int numberOfTests = 10;              // number of tests
-        int initialArraySize = 100;        // initial array size
+        int numberOfTests = 100;              // number of tests
+        int initialArraySize = 1000;        // initial array size
         int increaseArraySize = 100;       // increase Arraysize by this value
+
+        long simpleStart;
+        long durationSimple;
+        long durationSimpleSum;
+
+        long threadsStart;
+        long threadsDuration;
+        long durationThreadsSum;
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
         boolean printToConsole = false;
@@ -34,8 +44,6 @@ public class QuickSortTest extends Application {
             int arraySize = initialArraySize + j * increaseArraySize;
             Integer[] dataArraySimple = new Integer[arraySize];
             Integer[] dataArrayThreads = new Integer[arraySize];
-
-
 
             for (int i = 0; i < arraySize; i++) {
                 dataArraySimple[i] = random.nextInt(5 * arraySize);
@@ -48,51 +56,51 @@ public class QuickSortTest extends Application {
                 System.out.println("SIMPLE Array Size = " + arraySize);
                 System.out.println("Before: " + quickSortSimple);
             }
-            long simpleStart = 0;
-            long durationSimple = 0;
-            long durationSimpleAverage = 0;
+            durationSimpleSum = 0;
             for (int i = 0; i < averaging; i++) {
+                QuickSortSimple avgQuickSortSimple = quickSortSimple.copy();
                 simpleStart = System.nanoTime();
-                quickSortSimple.divideAndConquer();
+                avgQuickSortSimple.divideAndConquer();
                 durationSimple = System.nanoTime() - simpleStart;
-                durationSimpleAverage = durationSimpleAverage + durationSimple;
+                durationSimpleSum = durationSimpleSum + durationSimple;
             }
-            simpleMap.put(arraySize, durationSimpleAverage/averaging);
+            simpleMap.put(arraySize, durationSimpleSum / averaging);
             if (printToConsole) {
+                quickSortSimple.divideAndConquer();
                 System.out.println("After: " + quickSortSimple);
                 System.out.println();
             }
 
             // ***************************** QUICKSORT THREADS ********************************************
-            long threadsStart = 0;
-            long threadsDuration = 0;
-            long durationThreadsAverage = 0;
 
             ExecutorService executorService = Executors.newFixedThreadPool(maxThreads);
             ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executorService;
-            QuickSortThreads quickSortThreads = new QuickSortThreads(dataArrayThreads,
-                    0, dataArrayThreads.length - 1, threadPoolExecutor);
+            QuickSortThreads quickSortThreads = new QuickSortThreads(dataArrayThreads, 0, dataArrayThreads.length - 1, threadPoolExecutor);
 
             if (printToConsole) {
                 System.out.println("THREADS Array Size = " + arraySize);
                 System.out.println("Before: " + quickSortThreads);
             }
 
+            durationThreadsSum = 0;
             for (int i = 0; i < averaging; i++) {
+                // Copy the initial array, so that averaging makes sense!
+                QuickSortThreads avgQuickSortThreads = quickSortThreads.copy();
                 threadsStart = System.nanoTime();
-                quickSortThreads.divideAndConquer(threadPoolExecutor);
+                avgQuickSortThreads.divideAndConquer(threadPoolExecutor);
                 threadsDuration = System.nanoTime() - threadsStart;
-                durationThreadsAverage = durationThreadsAverage + threadsDuration;
+                durationThreadsSum = durationThreadsSum + threadsDuration;
             }
-            executorService.shutdown();
-            threadPoolExecutor.shutdown();
 
-            threadsMap.put(arraySize, durationThreadsAverage/averaging);
+            threadsMap.put(arraySize, durationThreadsSum / averaging);
 
             if (printToConsole) {
+                quickSortThreads.divideAndConquer(threadPoolExecutor);
                 System.out.println("After: " + quickSortThreads);
                 System.out.println();
             }
+            executorService.shutdown();
+            threadPoolExecutor.shutdown();
 
 
         }

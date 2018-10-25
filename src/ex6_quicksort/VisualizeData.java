@@ -41,7 +41,7 @@ public class VisualizeData {
         final NumberAxis yAxis = new NumberAxis();
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-        lineChart.setTitle("Quicksort Data (avg: " + average + ")");
+        lineChart.setTitle("Quicksort Data (avg: " + average + ", threads: " + this.threads + ")");
         xAxis.setLabel("Array Size");
         yAxis.setLabel("Computational Time [nano]");
 
@@ -58,10 +58,8 @@ public class VisualizeData {
             threadsSeries.getData().add(new XYChart.Data(key, this.threadsMap.get(key)));
         }
 
-
-
         simpleSeries.setName("Simple");
-        threadsSeries.setName("Threads ["+ this.threads +"]");
+        threadsSeries.setName("Threads");
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(simpleSeries);
