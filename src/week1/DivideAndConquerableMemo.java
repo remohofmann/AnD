@@ -7,6 +7,9 @@ import java.util.Map;
 
 public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerable<OutputType> {
 
+    @Override
+    List<? extends DivideAndConquerableMemo<OutputType>> decompose();
+
     OutputType getKey();
 
 
@@ -20,7 +23,7 @@ public interface DivideAndConquerableMemo<OutputType> extends DivideAndConquerab
         // Return Value of an Index (key) if this Index exists in Map
         if (computedFiboValuesMap.containsKey(this.getKey())) return computedFiboValuesMap.get(this.getKey());
 
-        List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = (List<? extends DivideAndConquerableMemo<OutputType>>) this.decompose();
+        List<? extends DivideAndConquerableMemo<OutputType>> subcomponents = this.decompose();
 
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
 

@@ -6,13 +6,15 @@ import java.util.concurrent.*;
 
 public interface DivideAndConquerableThreads<OutputType> extends DivideAndConquerable<OutputType> {
 
+    @Override
+    List<? extends DivideAndConquerableThreads<OutputType>> decompose();
 
     // DEFAULT divideAndConquer method which returns a type of 'OutputType'
     default OutputType divideAndConquer(ThreadPoolExecutor threadPoolExecutor) throws ExecutionException, InterruptedException {
         if (this.isBasic()) {
             return this.baseFunction();
         }
-        List<? extends DivideAndConquerableThreads<OutputType>> subcomponents = (List<? extends DivideAndConquerableThreads<OutputType>>) this.decompose();
+        List<? extends DivideAndConquerableThreads<OutputType>> subcomponents = this.decompose();
         List<OutputType> intermediateResults = new ArrayList<OutputType>(subcomponents.size());
 
         // TODO: threadpool comes here -> for each 'add' there should be a thread!
