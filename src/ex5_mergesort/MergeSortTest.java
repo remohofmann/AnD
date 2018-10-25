@@ -66,9 +66,9 @@ public class MergeSortTest extends Application {
                 simpleStart = System.nanoTime();
                 mergeSortIntegerSimple.divideAndConquer();
                 durationSimple = System.nanoTime() - simpleStart;
-                durationSimpleAverage = (durationSimpleAverage + durationSimple) / (i + 1);
+                durationSimpleAverage = durationSimpleAverage + durationSimple;
             }
-            simpleMap.put(arraySize, durationSimpleAverage);
+            simpleMap.put(arraySize, durationSimpleAverage/averaging);
             if (printToConsole) {
                 System.out.println("After: " + mergeSortIntegerSimple);
                 System.out.println();
@@ -92,12 +92,10 @@ public class MergeSortTest extends Application {
                 threadsStart = System.nanoTime();
                 mergeSortIntegerThreads.divideAndConquer((ThreadPoolExecutor) executorService);
                 threadsDuration = System.nanoTime() - threadsStart;
-                durationThreadsAverage = (durationThreadsAverage + threadsDuration) / (i + 1);
+                durationThreadsAverage = durationThreadsAverage + threadsDuration;
             }
             executorService.shutdown();
-
-            threadsMap.put(arraySize, durationThreadsAverage);
-            executorService.shutdown();
+            threadsMap.put(arraySize, durationThreadsAverage/averaging);
 
             if (printToConsole) {
                 System.out.println("After: " + mergeSortIntegerThreads);
@@ -121,11 +119,11 @@ public class MergeSortTest extends Application {
                 threadsStartInsertion = System.nanoTime();
                 mergeSortIntegerThreadsInsertionSort.divideAndConquer((ThreadPoolExecutor) executorServiceInsertion);
                 threadsDurationInsertion = System.nanoTime() - threadsStartInsertion;
-                threadsDurationInsertionAverage = (threadsDurationInsertionAverage + threadsDurationInsertion) / (i + 1);
+                threadsDurationInsertionAverage = threadsDurationInsertionAverage + threadsDurationInsertion;
             }
 
             executorServiceInsertion.shutdown();
-            threadsInsertionMap.put(arraySize, threadsDurationInsertionAverage);
+            threadsInsertionMap.put(arraySize, threadsDurationInsertionAverage/averaging);
 
             if (printToConsole) {
                 System.out.println("After: " + mergeSortIntegerThreadsInsertionSort);
@@ -150,11 +148,11 @@ public class MergeSortTest extends Application {
                 mergeWithInsertionStart = System.nanoTime();
                 mergeSortThreadsMergeWithInsertion.divideAndConquer((ThreadPoolExecutor) executorService1);
                 mergeWithInsertionDuration = System.nanoTime() - mergeWithInsertionStart;
-                mergeWithInsertionAverage = (mergeWithInsertionAverage + mergeWithInsertionDuration) / (i + 1);
+                mergeWithInsertionAverage = mergeWithInsertionAverage + mergeWithInsertionDuration;
             }
 
             executorService1.shutdown();
-            threadsMergeWithInsertionMap.put(arraySize, mergeWithInsertionAverage);
+            threadsMergeWithInsertionMap.put(arraySize, mergeWithInsertionAverage/averaging);
 
             if (printToConsole) {
                 System.out.println("After: " + mergeSortThreadsMergeWithInsertion);
