@@ -2,21 +2,18 @@ package ex6_quicksort;
 
 import ex5_mergesort.IntegerComparator;
 import week1.DivideAndConquerable;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort<Integer>{
+public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort<Integer> {
 
     private static IntegerComparator sorter = new IntegerComparator();
-    private int[] dataArray;
+    private Integer[] dataArray;
     private int left;
     private int right;
 
-    public QuickSortSimple(int[] dataArray, int left, int right) {
-        System.out.println("Left: " + left + "\nRight: " + right);
+    public QuickSortSimple(Integer[] dataArray, int left, int right) {
         this.dataArray = dataArray;
         this.left = left;
         this.right = right;
@@ -36,46 +33,26 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
     public List<? extends DivideAndConquerable<Integer>> decompose() {
         List<DivideAndConquerable<Integer>> decomposedList = new ArrayList<>();
 
-        // prepare Array for Quicksorting
-        this.swap(getMedianOfThree (left, right, sorter), right);
+        swap(getMedianOfThree(left, right, sorter), right);
+        int mid = partition(left, right, sorter);
 
-        // partition function from Quicksort Interface
-            // Interface function is not used because it works on this.dataarray
-            // Probably this could be fixed
-        int pivot = read (right);
-        int i = left;
-        int j = right;
-        while (i<j){
-            while (i<j && sorter.compare (read(i), pivot) < 0)
-                i++; // move right ( paint green ) in left partition
-            while (j>i && sorter.compare (read (j), pivot) >= 0)
-                j--; // move left ( paint orange ) in right partition
-            if (i<j) swap(i, j); // partition (" white swap ")
-        }
-        swap(i, right); // "orange - yellow swap "
-        int mid = i;
-        // End of partition function from Quicksort Interface
-
-        System.out.println("i: " + i);
-        System.out.println("dataArray[i]: " + dataArray[i]);
-        System.out.println("Right: " + right + "\nLeft: " + left + "\n" + this.toString());
-
-
-        decomposedList.add(new QuickSortSimple(this.dataArray, this.right, mid+1));
-        decomposedList.add(new QuickSortSimple(this.dataArray, mid, left));
+        decomposedList.add(new QuickSortSimple(dataArray, left, mid-1));
+        decomposedList.add(new QuickSortSimple(dataArray, mid+1, right));
 
         return decomposedList;
     }
 
-    // Recombining scheint nicht notwendig zu sein, da der Output von Decompose (Pivot) bereits korrekt im Array gespeichert wird
+    /** Since we are handing over the full dataArray, no need to recombine any of
+     * the subcomponents! */
     @Override
     public Integer recombine(List<Integer> intermediateResults) {
         return null;
     }
 
+
     @Override
-    public Integer read(int left) {
-        return this.dataArray[left];
+    public Integer read(int index) {
+        return this.dataArray[index];
     }
 
     @Override
@@ -93,4 +70,6 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
         }
         return Arrays.toString(array);
     }
+
+    public Integer[] getDataArray(){return this.dataArray;}
 }

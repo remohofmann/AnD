@@ -15,13 +15,14 @@ public class VisualizeData {
 
     private HashMap simpleMap;
     private HashMap threadsMap;
-    private int  average;
+    private int  average, threads;
 
 
-    public VisualizeData(HashMap simpleMap, HashMap threadsMap, int average) {
+    public VisualizeData(HashMap simpleMap, HashMap threadsMap, int average, int threads) {
         this.simpleMap = simpleMap;
         this.threadsMap = threadsMap;
         this.average = average;
+        this.threads = threads;
     }
 
 
@@ -34,13 +35,13 @@ public class VisualizeData {
         TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
         TreeMap<Integer, Integer> threadsTreeMap = new TreeMap<Integer, Integer>(this.threadsMap);
 
-        primaryStage.setTitle("Merge Sort Algorithms");
+        primaryStage.setTitle("Quicksort Algorithms");
 
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-        lineChart.setTitle("Merge Sort Data (avg: " + average + ")");
+        lineChart.setTitle("Quicksort Data (avg: " + average + ")");
         xAxis.setLabel("Array Size");
         yAxis.setLabel("Computational Time [nano]");
 
@@ -60,7 +61,7 @@ public class VisualizeData {
 
 
         simpleSeries.setName("Simple");
-        threadsSeries.setName("Threads");
+        threadsSeries.setName("Threads ["+ this.threads +"]");
 
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(simpleSeries);

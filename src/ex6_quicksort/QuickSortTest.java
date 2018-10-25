@@ -1,15 +1,11 @@
 package ex6_quicksort;
 
-import ex5_mergesort.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class QuickSortTest extends Application {
 
@@ -17,24 +13,24 @@ public class QuickSortTest extends Application {
     private static HashMap threadsMap = new HashMap();
 
     private static int averaging = 10;
+    private static int maxThreads = 2;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         Random random = new Random();
 
-        int numberOfTests = 1;              // number of tests
-        int initialArraySize = 8;        // increase Arraysize with this value
-        int increasArraySize = 1;
-        int maxThreads = 4;     // = number of cores
+        int numberOfTests = 100;              // number of tests
+        int initialArraySize = 100;        // increase Arraysize with this value
+        int increaseArraySize = 100;
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
-        boolean printToConsole = true;
+        boolean printToConsole = false;
 
-        for (int j = 1; j < numberOfTests + 1; j++) {
+        for (int j = 0; j < numberOfTests; j++) {
 
-            int arraySize = initialArraySize + j * increasArraySize;
-            int[] dataArraySimple = new int[arraySize];
-            int[] dataArrayThreads = new int[arraySize];
+            int arraySize = initialArraySize + j * increaseArraySize;
+            Integer[] dataArraySimple = new Integer[arraySize];
+            Integer[] dataArrayThreads = new Integer[arraySize];
 
 
 
@@ -104,7 +100,7 @@ public class QuickSortTest extends Application {
     public void start(Stage primaryStage) {
         try {
             // Show Data
-            VisualizeData visualizeData = new VisualizeData(simpleMap, threadsMap, averaging);
+            VisualizeData visualizeData = new VisualizeData(simpleMap, threadsMap, averaging, maxThreads);
             visualizeData.showData(primaryStage).show();
         } catch (Exception e) {
             e.printStackTrace();
