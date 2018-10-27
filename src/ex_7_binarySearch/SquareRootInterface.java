@@ -12,26 +12,17 @@ public interface SquareRootInterface {
         return result;
     }
 
-    default double sqrtRecursive(double x, double mid, double epsilon) {
-        double result = 0;
-        if(Math.abs(result*result - x) < epsilon) return result;
-
-        if(mid*mid > x){
-            System.out.println("bigger");
-            System.out.println("result: " + result);
-            System.out.println("mid: " + mid);
-            result = result + sqrtRecursive(x, mid/2, epsilon);
+    default double sqrtRecursive(double possibleSqrt, double lastDiff, double targetValue, double epsilon) {
+        double square = possibleSqrt*possibleSqrt;
+        double newDiff = lastDiff/2;
+        if (Math.abs(square - targetValue) < epsilon) return possibleSqrt;
+        else if(square > targetValue){
+            return sqrtRecursive(possibleSqrt-newDiff, newDiff, targetValue, epsilon);
         }
-        else {
-            System.out.println("smaller");
-            System.out.println("result: " + result);
-            System.out.println("mid: " + mid);
-            result = result + mid;
-            result = result + sqrtRecursive(x, mid/2, epsilon);
+        else if (square < targetValue) {
+            return sqrtRecursive(possibleSqrt + newDiff, newDiff, targetValue, epsilon);
         }
-
-
-        return result;
+        return Double.parseDouble(null);
     }
 }
 

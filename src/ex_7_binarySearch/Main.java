@@ -3,7 +3,7 @@ package ex_7_binarySearch;
 public class Main {
 
     public static void main(String[] args){
-        int arr[] = new int[]{1, 4, 9, 16, 25};
+        int arr[] = new int[]{1, 4, 9, 16, 25, 4500};
         double epsilon = 0.001;
 
         System.out.println("----Iterative Function----");
@@ -11,6 +11,13 @@ public class Main {
         for(int j = 0; j<arr.length; j++) {
             SquareRoot tmp = new SquareRoot(arr[j], epsilon);
             System.out.println("x = " + arr[j] + "; sqrt("+ arr[j]+") = " + tmp.squareRootIterative());
+        }
+        System.out.println();
+        System.out.println("---- Recursive Function----");
+        System.out.println("Epsilon: " + epsilon);
+        for (int j = 0; j < arr.length; j++) {
+            SquareRoot tmp = new SquareRoot(arr[j], epsilon);
+            System.out.println("x = " + arr[j] + "; sqrt(" + arr[j] + ") = " + tmp.squareRootRecursive());
         }
 
 
