@@ -10,7 +10,7 @@ public class Main {
         System.out.println("Epsilon: " + epsilon);
         for(int j = 0; j<arr.length; j++) {
             SquareRoot tmp = new SquareRoot(arr[j], epsilon);
-            System.out.println("x = " + arr[j] + "; sgrt(x) = " + tmp.squareRootIterative());
+            System.out.println("x = " + arr[j] + "; sqrt("+ arr[j]+") = " + tmp.squareRootIterative());
         }
 
 
