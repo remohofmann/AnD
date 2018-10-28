@@ -23,7 +23,17 @@ public class QuickSortThreads implements DivideAndConquerableThreads<Integer>, Q
         this.right = right;
         this.executorService = executorService;
     }
+    public QuickSortThreads(Integer[] dataArray, int left, int right) {
+        this.dataArray = dataArray;
+        this.left = left;
+        this.right = right;
+    }
+
     public QuickSortThreads(){};
+
+    public void addThreadPoolExecutor(ThreadPoolExecutor executorService){
+        this.executorService = executorService;
+    }
 
     @Override
     public boolean isBasic() {
@@ -76,11 +86,10 @@ public class QuickSortThreads implements DivideAndConquerableThreads<Integer>, Q
 
     public Integer[] getDataArray(){return this.dataArray;}
 
-    public QuickSortThreads copy(){
+    public QuickSortThreads copyWithoutExecutorService(){
         QuickSortThreads quickSortThreadsCopy = new QuickSortThreads();
         quickSortThreadsCopy.left = this.left;
         quickSortThreadsCopy.right = this.right;
-        quickSortThreadsCopy.executorService = this.executorService;
         quickSortThreadsCopy.dataArray = new Integer[this.dataArray.length];
         for (int i=0 ; i < this.dataArray.length ; i++){
             quickSortThreadsCopy.dataArray[i] = new Integer(this.dataArray[i]);
