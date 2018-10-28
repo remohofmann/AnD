@@ -23,7 +23,7 @@ public class Main {
 
 
         /*************************** logarithm ***************************************/
-        double logEpsilon = 0.0000001;
+        double logEpsilon = 0.000001;
         arr = new int[]{2, 4, 8, 16, 32, 64};
         System.out.println("Epsilon: " + logEpsilon);
         System.out.println();

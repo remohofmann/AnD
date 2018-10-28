@@ -5,16 +5,16 @@ public interface LogarithmInterface {
     default double logarithmIterative(double x, double epsilon) {
         double result = 0;
         int i = 2;
-        while(Math.abs(Math.pow(result, 2)-x) > epsilon) {
-            if(Math.pow(result, 2) < x) result = result + x/i;
-            else if (Math.pow(result, 2) > x) result  = result - x/i;
+        while(Math.abs(Math.pow(2, result)-x) > epsilon) {
+            if(Math.pow(2, result) < x) result = result + x/i;
+            else if (Math.pow(2, result) > x) result  = result - x/i;
             i = i*2;
         }
         return result;
     }
 
     default double logarithmRecursive(double possibleLog, double lastDiff, double targetValue, double epsilon) {
-        double power = Math.pow(possibleLog, 2);
+        double power = Math.pow(2, possibleLog);
         double newDiff = lastDiff/2;
         if (Math.abs(power - targetValue) < epsilon) return possibleLog;
         else if(power > targetValue){
