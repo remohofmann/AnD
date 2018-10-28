@@ -19,6 +19,6 @@ public class SquareRoot implements SquareRootInterface {
 
     public double squareRootIterative() { return this.sqrtIterative(this.x, this.epsilon); }
 
-    public double squareRootRecursive() { return this.sqrtRecursive(this.x/2, this.x/2, this.x, this.epsilon); }
+    public double squareRootRecursive() { return this.sqrtRecursive(this.x, this.x, this.x, this.epsilon); }
 
 }
