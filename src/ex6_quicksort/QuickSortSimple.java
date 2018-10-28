@@ -75,13 +75,13 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
     public Integer[] getDataArray(){return this.dataArray;}
 
     public QuickSortSimple copy(){
-        QuickSortSimple quickSortSimple = new QuickSortSimple();
-        quickSortSimple.left = this.left;
-        quickSortSimple.right = this.right;
-        quickSortSimple.dataArray = new Integer[this.dataArray.length];
+        QuickSortSimple quickSortSimpleCopy = new QuickSortSimple();
+        quickSortSimpleCopy.left = this.left;
+        quickSortSimpleCopy.right = this.right;
+        quickSortSimpleCopy.dataArray = new Integer[this.dataArray.length];
         for (int i=0 ; i < this.dataArray.length ; i++){
-            quickSortSimple.dataArray[i] = new Integer(this.dataArray[i]);
+            quickSortSimpleCopy.dataArray[i] = new Integer(this.dataArray[i]);
         }
-        return quickSortSimple;
+        return quickSortSimpleCopy;
     }
 }
