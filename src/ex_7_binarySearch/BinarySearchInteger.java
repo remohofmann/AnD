@@ -18,10 +18,10 @@ public class BinarySearchInteger implements BinarySearchInterface<Integer> {
 
     public static void main(String[] args){
         BinarySearchInteger binSI = new BinarySearchInteger();
-        System.out.println(binSI.a);
+        System.out.println("Array: " + binSI.a);
         Integer integer = new Integer(15);
         int index = binSI.binarySearch(binSI.a, 0, binSI.a.size(), integer, comparator);
-        System.out.println("Index of Integer " + integer + " is: " + index);
+        System.out.println("Index of searched integer " + integer + " is: " + index);
     }
 
 
