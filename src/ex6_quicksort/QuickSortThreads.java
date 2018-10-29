@@ -2,23 +2,38 @@ package ex6_quicksort;
 
 import ex5_mergesort.IntegerComparator;
 import week1.DivideAndConquerable;
+import week1.DivideAndConquerableThreads;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
-public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort<Integer> {
+public class QuickSortThreads implements DivideAndConquerableThreads<Integer>, Quicksort<Integer> {
 
     private static IntegerComparator sorter = new IntegerComparator();
     private Integer[] dataArray;
     private int left;
     private int right;
+    private ThreadPoolExecutor executorService;
 
-    public QuickSortSimple(Integer[] dataArray, int left, int right) {
+    public QuickSortThreads(Integer[] dataArray, int left, int right, ThreadPoolExecutor executorService) {
+        this.dataArray = dataArray;
+        this.left = left;
+        this.right = right;
+        this.executorService = executorService;
+    }
+    public QuickSortThreads(Integer[] dataArray, int left, int right) {
         this.dataArray = dataArray;
         this.left = left;
         this.right = right;
     }
-    public QuickSortSimple(){}
+
+    public QuickSortThreads(){};
+
+    public void addThreadPoolExecutor(ThreadPoolExecutor executorService){
+        this.executorService = executorService;
+    }
 
     @Override
     public boolean isBasic() {
@@ -31,15 +46,12 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
     }
 
     @Override
-    public List<? extends DivideAndConquerable<Integer>> decompose() {
-        List<DivideAndConquerable<Integer>> decomposedList = new ArrayList<>();
-
+    public List<? extends DivideAndConquerableThreads<Integer>> decompose() {
+        List<DivideAndConquerableThreads<Integer>> decomposedList = new ArrayList<>();
         swap(getMedianOfThree(left, right, sorter), right);
         int mid = partition(left, right, sorter);
-
-        decomposedList.add(new QuickSortSimple(dataArray, left, mid-1));
-        decomposedList.add(new QuickSortSimple(dataArray, mid+1, right));
-
+        decomposedList.add(new QuickSortThreads(dataArray, left, mid-1,  executorService));
+        decomposedList.add(new QuickSortThreads(dataArray, mid+1, right, executorService));
         return decomposedList;
     }
 
@@ -74,14 +86,14 @@ public class QuickSortSimple implements DivideAndConquerable<Integer>, Quicksort
 
     public Integer[] getDataArray(){return this.dataArray;}
 
-    public QuickSortSimple copy(){
-        QuickSortSimple quickSortSimpleCopy = new QuickSortSimple();
-        quickSortSimpleCopy.left = this.left;
-        quickSortSimpleCopy.right = this.right;
-        quickSortSimpleCopy.dataArray = new Integer[this.dataArray.length];
+    public QuickSortThreads copyWithoutExecutorService(){
+        QuickSortThreads quickSortThreadsCopy = new QuickSortThreads();
+        quickSortThreadsCopy.left = this.left;
+        quickSortThreadsCopy.right = this.right;
+        quickSortThreadsCopy.dataArray = new Integer[this.dataArray.length];
         for (int i=0 ; i < this.dataArray.length ; i++){
-            quickSortSimpleCopy.dataArray[i] = new Integer(this.dataArray[i]);
+            quickSortThreadsCopy.dataArray[i] = new Integer(this.dataArray[i]);
         }
-        return quickSortSimpleCopy;
+        return quickSortThreadsCopy;
     }
 }
