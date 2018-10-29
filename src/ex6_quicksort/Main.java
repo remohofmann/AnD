@@ -37,16 +37,17 @@ public class Main extends Application {
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
         boolean printToConsole = false;
+        // set to true to simulate worst case
+        // setting to false will generate random values
+        boolean generateWorstCase = true;
 
         for (int j = 0; j < numberOfTests; j++) {
-
             int arraySize = initialArraySize + j * increaseArraySize;
             Integer[] dataArraySimple = new Integer[arraySize];
-            Integer[] dataArrayThreads = new Integer[arraySize];
-
-            for (int i = 0; i < arraySize; i++) {
-                dataArraySimple[i] = random.nextInt(5 * arraySize);
-                dataArrayThreads[i] = random.nextInt(5 * arraySize);
+            //WORST CASE
+            for (int i = arraySize -1; i >=0 ; i--) {
+                if (generateWorstCase) dataArraySimple[arraySize - i - 1] = i;
+                else dataArraySimple[i] = random.nextInt(5 * arraySize);
             }
 
             // ***************************** QUICKSORT SIMPLE ********************************************
@@ -72,14 +73,18 @@ public class Main extends Application {
 
             // ***************************** QUICKSORT THREADS ********************************************
 
-//            QuickSortThreads quickSortThreads = new QuickSortThreads(dataArrayThreads, 0, dataArrayThreads.length - 1, (ThreadPoolExecutor) executorService);
+            Integer[] dataArrayThreads = new Integer[arraySize];
+            //WORST CASE
+            for (int i = arraySize -1; i >=0 ; i--) {
+                if (generateWorstCase) dataArrayThreads[arraySize - i - 1] = i;
+                else dataArrayThreads[i] = random.nextInt(5 * arraySize);
+            }
             QuickSortThreads quickSortThreads = new QuickSortThreads(dataArrayThreads, 0, dataArrayThreads.length - 1);
 
             if (printToConsole) {
                 System.out.println("THREADS Array Size = " + arraySize);
                 System.out.println("Before: " + quickSortThreads);
             }
-
             durationThreadsSum = 0;
             for (int i = 0; i < averaging; i++) {
                 // Copy the initial array, so that averaging makes sense!
@@ -109,7 +114,6 @@ public class Main extends Application {
 
 
         }
-
         launch(args);
     }
 
