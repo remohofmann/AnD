@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class QuickSortTest extends Application {
+public class Main extends Application {
 
     private static HashMap simpleMap = new HashMap();
     private static HashMap threadsMap = new HashMap();
