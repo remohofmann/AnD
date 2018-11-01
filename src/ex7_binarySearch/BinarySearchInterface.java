@@ -1,4 +1,4 @@
-package ex_7_binarySearch;
+package ex7_binarySearch;
 
 import java.util.Comparator;
 import java.util.List;

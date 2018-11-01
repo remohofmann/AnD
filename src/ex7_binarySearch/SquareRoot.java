@@ -1,4 +1,4 @@
-package ex_7_binarySearch;
+package ex7_binarySearch;
 
 public class SquareRoot implements SquareRootInterface {
     private double x;

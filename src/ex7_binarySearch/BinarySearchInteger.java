@@ -1,4 +1,4 @@
-package ex_7_binarySearch;
+package ex7_binarySearch;
 
 import ex5_mergesort.IntegerComparator;
 
@@ -11,7 +11,7 @@ public class BinarySearchInteger implements BinarySearchInterface<Integer> {
     private List<Integer> a = new ArrayList<>();
 
     public BinarySearchInteger(){
-        for (int i = 0 ; i < 29 ; i++){
+        for (int i = 0 ; i < 21 ; i++){
             a.add(i*2);
         }
     }
@@ -21,7 +21,8 @@ public class BinarySearchInteger implements BinarySearchInterface<Integer> {
         System.out.println("Array: " + binSI.a);
         Integer integer = new Integer(15);
         int index = binSI.binarySearch(binSI.a, 0, binSI.a.size(), integer, comparator);
-        System.out.println("Index of searched integer " + integer + " is: " + index);
+        System.out.println("Found index of searched integer " + integer + " is: " + index);
+        System.out.println("Found index of searched integer " + integer + " is: " + index);
     }
 
 
