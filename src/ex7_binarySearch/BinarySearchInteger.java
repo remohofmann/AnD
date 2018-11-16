@@ -19,9 +19,9 @@ public class BinarySearchInteger implements BinarySearchInterface<Integer> {
     public static void main(String[] args){
         BinarySearchInteger binSI = new BinarySearchInteger();
         System.out.println(binSI);
-        Integer integer = new Integer(40);
+        Integer integer = new Integer(28);
         int index = binSI.binarySearch(binSI.a, 0, binSI.a.size(), integer, comparator);
-        System.out.println("search for '" + integer +"'");
+        System.out.println("searching for '" + integer +"'...");
         System.out.println("index is: " + index);
     }
 

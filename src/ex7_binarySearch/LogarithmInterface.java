@@ -6,7 +6,8 @@ public interface LogarithmInterface {
         double result = 0;
         int i = 2;
         while(Math.abs(Math.pow(base, result)-x) > epsilon) {
-            if(Math.pow(base, result) < x) result = result + x/i;
+            double intResult = Math.pow(base, result);
+            if(intResult < x) result = result + x/i;
             else if (Math.pow(base, result) > x) result  = result - x/i;
             i = i*2;
         }
