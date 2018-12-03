@@ -7,9 +7,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class ViewDataController extends Application {
@@ -17,6 +15,13 @@ public class ViewDataController extends Application {
     private HashMap simpleMap;
     private HashMap memoMap;
     private HashMap threadMap;
+    private HashMap iterativeMap;
+    private HashMap linearMap;
+    private HashMap logMap;
+    private HashMap quadraticMap;
+    private HashMap cubicMap;
+    private List<HashMap> mapList;
+
 
     public ViewDataController(HashMap simpleMap, HashMap memoMap, HashMap threadMap) {
         this.simpleMap = simpleMap;
@@ -24,9 +29,17 @@ public class ViewDataController extends Application {
         this.threadMap = memoMap;
     }
 
-    public ViewDataController(HashMap simpleMap, HashMap memoMap) {
+    public ViewDataController(HashMap simpleMap, HashMap memoMap, HashMap iterativeMap, HashMap linearMap, HashMap logMap, HashMap quadraticMap, HashMap cubicMap) {
         this.simpleMap = simpleMap;
         this.memoMap = memoMap;
+        this.iterativeMap = iterativeMap;
+        this.linearMap = linearMap;
+        this.logMap = logMap;
+        this.quadraticMap = quadraticMap;
+        this.cubicMap = cubicMap;
+
+// THIS CODELINE DOES NOT WORK!!!
+        //Collections.addAll(this.mapList, simpleMap, memoMap, iterativeMap, linearMap, logMap, quadraticMap, cubicMap);
     }
 
     public void showData(Stage primaryStage) {
@@ -46,6 +59,21 @@ public class ViewDataController extends Application {
         xAxis.setLabel("Size of Fibonacci Line");
         yAxis.setLabel("Computation Time");
 
+        Scene scene = new Scene(lineChart, 800, 600);
+
+// THIS CODELINES DOES NOT WORK!!!
+
+//        for(int i = 0; i < mapList.size(); i++){
+//            TreeMap<Integer, Integer> tmpTreeMap = new TreeMap<Integer, Integer>(this.mapList.get(i));
+//            XYChart.Series tmpSeries = new XYChart.Series();
+//            Set<Integer> tmpKeys = tmpTreeMap.keySet();
+//            for (Integer key : tmpKeys) {
+//                tmpSeries.getData().add(new XYChart.Data(key, this.mapList.get(i).get(key)));
+//            }
+//            tmpSeries.setName("Simple");
+//            lineChart.getData().add(tmpSeries);
+//
+//        }
 
         XYChart.Series simpleSeries = new XYChart.Series();
         Set<Integer> simpleKeys = simpleTreeMap.keySet();
@@ -62,7 +90,6 @@ public class ViewDataController extends Application {
         simpleSeries.setName("Simple");
         memoSeries.setName("Memoization");
 
-        Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(simpleSeries);
         lineChart.getData().add(memoSeries);
 
