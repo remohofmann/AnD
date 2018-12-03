@@ -25,7 +25,7 @@ public class MergeSortTest extends Application {
 
         int numberOfTests = 100;              // number of tests
         int initialArraySize = 100;        // increase Arraysize with this value
-        int maxThreads = 4;     // = number of cores
+        int maxThreads = Runtime.getRuntime().availableProcessors();     // = number of cores
 
         // set to true to print arrays to console -> time consuming!! remove for proper testing!
         boolean printToConsole = false;

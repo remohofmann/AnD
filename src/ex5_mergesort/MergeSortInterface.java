@@ -20,6 +20,10 @@ public interface MergeSortInterface<E> {
             int k = left;                                           // sorted merged-halves start
             mergesortImpl(data, aux, left, mid, sorter);            // left-DnC
             mergesortImpl(data, aux, mid + 1, right, sorter);       // right-DnC
+            /** last comparison is between i=mid and j=right,
+             * but only one element is moved.
+             * -> the last item in data is not moved to aux!
+             * -> arraycopy is necessary (line 34)! */
             while (i <= mid && j <= right) {                        // left-right-merge left & right
                 if (sorter.compare((E) data[i], (E) data[j]) < 0)
                     aux[k++] = data[i++];                           // put aux[k] = data[i], THEN k++ and i++
@@ -29,7 +33,8 @@ public interface MergeSortInterface<E> {
             /** arraycopy copies (mid-i+1) elements from 'data'
              * starting at position i, to 'aux' starting
              * at position k.*/
-            System.arraycopy(data, i, aux, k, mid - i + 1);         // copy possible sorted data left-over into sub-aux
+            /** copy the last leftover element to aux. */
+            System.arraycopy(data, i, aux, k, mid - i + 1);         // copy possible sorted data left-over (!) (max 1 element!) into sub-aux
             System.arraycopy(aux, left, data, left, j - left);      // copy processed sub-aux back into data for output
         }
         // else do nothing, just go up again!

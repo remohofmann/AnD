@@ -1,0 +1,90 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid102\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid103\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid302\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid303\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12640\viewh14580\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+
+\f0\fs24 \cf0 Binary search on sortedArrays: code description\
+\
+Assumptions\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\'95	}left, right, mid are indexes of a sorted array \'84a\'93 that is sorted in increasing order from left to right.\
+{\listtext	\'95	}\'84target\'93 is an element of which we want to know if it is contained in the array and if yes, where is its position in the array.\
+{\listtext	\'95	}method \'84compare(x,y)\'93 does compare two elements x,y and returns an integer value:\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\partightenfactor0
+\ls1\ilvl1\cf0 {\listtext	\uc0\u8259 	}if x<y return value < 0\
+{\listtext	\uc0\u8259 	}if x=y, return 0\
+{\listtext	\uc0\u8259 	}if x>y, return value > 0\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\'95	}method \'84a.get(i)\'93 gets the element of the array at index i\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 Overall description\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\'95	}the method \'84binarySearch\'93\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\partightenfactor0
+\ls2\ilvl1\cf0 {\listtext	\uc0\u8259 	}takes 2 integer values (left, right) and a \'84E\'93 value (target) as parameters: \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\partightenfactor0
+\ls2\ilvl2\cf0 {\listtext	\uc0\u8259 	}left and right are the left end and the right end of an array within which the target could be contained\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\partightenfactor0
+\ls2\ilvl1\cf0 {\listtext	\uc0\u8259 	}returns an integer value: this should be the position of the target in the array.\
+{\listtext	\uc0\u8259 	}has 2 recursive calls (lines 9 and 11)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 General description\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls3\ilvl0\cf0 {\listtext	\'95	}line 2: the index of the mid element is calculated\
+{\listtext	\'95	}line 3: the comparison between the target and the element at the mid position is calculated. (not vice-versa!)\
+{\listtext	\'95	}lines 4 - 7: some base cases are evaluated that should return the position of the target in the array. We\'92ll see later on that there are some errors made.\
+{\listtext	\'95	}lines 8-11: the recursive calls for different comparison cases are made.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 \
+Detailed description\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\'95	}line 2: using the left and right end of the (part-)array, the mid index is calculated. \
+{\listtext	\'95	}line 3: \'84comparison\'93 is calculated:\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\partightenfactor0
+\ls4\ilvl1\cf0 {\listtext	\uc0\u8259 	}comparison < 0 if target < mid element\
+{\listtext	\uc0\u8259 	}comparison = 0 if target = mid element\
+{\listtext	\uc0\u8259 	}comparison > 0 if target > mid element\
+{\listtext	\uc0\u8259 	}first conclusion: \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\partightenfactor0
+\ls4\ilvl2\cf0 {\listtext	\uc0\u8259 	}if comparison = 0, the array contains the target at position mid.\
+{\listtext	\uc0\u8259 	}if comparison < 0, the target is smaller than the mid position element, thus we need to go on searching to the left of the mid element position (since the array is sorted in ascending order) -> this is the recursive call on line 9.\
+{\listtext	\uc0\u8259 	}if comparison > 0, the target is greater than the mid position element, thus we need to go on searching to the right of the mid element position (since the array is sorted in ascending order) -> this is the recursive call on line 11.\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\'95	}lines 4-5: if right = left, there is no split possible and there was only one element left to compare with (on line 3):\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\partightenfactor0
+\ls4\ilvl1\cf0 {\listtext	\uc0\u8259 	}if that comparison is <= 0 the left index is returned, else the index of right+1 is returned. \
+{\listtext	\uc0\u8259 	}Both return values contain a possible error. \
+{\listtext	\uc0\u8259 	}Error in case of returning the left value: returning the left index is an error, since there is no differentiation made between the target is equal to the mid element and the target is smaller than the mid element. In both cases the index \'84left\'93 is returned. It could be the case that the target is smaller than the mid element, in which case another value should be returned. There is a need to inform \'84no matching value found\'93.\
+{\listtext	\uc0\u8259 	}Error in case of returning the right+1 value: returning the right+1 value ignores the fact that the element at index right+1 could still be greater than the target, thus returning the value right+1 yields in an error.\
+{\listtext	\uc0\u8259 	}Suggestion: if the target is not contained in the array, return the value -1. \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\'95	}lines 6-7:\
+\pard\tx940\tx1440\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li1440\fi-1440\partightenfactor0
+\ls4\ilvl1\cf0 {\listtext	\uc0\u8259 	}Now right is not equal to left, \
+\pard\tx1660\tx2160\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li2160\fi-2160\partightenfactor0
+\ls4\ilvl2\cf0 {\listtext	\uc0\u8259 	}first if-condition: if comparison = 0, return the value mid. The target was found in the array at position mid. Correct.\
+{\listtext	\uc0\u8259 	}second if-condition: if comparison < 0 and left = mid, return the value mid. The case left = mid is only possible if right = left+1 -> there are only 2 items left in the array to compare with. This too is an error, it does not make sense to return the mid value if the target is smaller than the mid position element. \
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\'95	}lines 8-9: if the target is smaller than the mid element, make a recursive call to search for the target in the left half of the array by reducing the searchable indexes to the range of left to mid-1.\
+{\listtext	\'95	}lines 10-11: if the target is greater than the mid element (the case = 0 was checked on line 6), make a recursive call to search for the target in the right half of the array by reducing the searchable indexes to the range of mid+1 to right.\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\partightenfactor0
+\ls4\ilvl0\cf0 {\listtext	\'95	}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\partightenfactor0
+\cf0 \
+\
+\
+\
+\
+\
+}

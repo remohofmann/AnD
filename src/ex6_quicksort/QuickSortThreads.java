@@ -1,7 +1,6 @@
 package ex6_quicksort;
 
 import ex5_mergesort.IntegerComparator;
-import week1.DivideAndConquerable;
 import week1.DivideAndConquerableThreads;
 
 import java.util.ArrayList;
