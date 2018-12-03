@@ -25,7 +25,7 @@ public class QuickSortTest extends Application {
 
         int numberOfTests = 100;              // number of tests
         int initialArraySize = 1000;        // initial array size
-        int increaseArraySize = 100;       // increase Arraysize by this value
+        int increaseArraySize = 4000;       // increase Arraysize by this value
 
         long simpleStart;
         long durationSimple;
