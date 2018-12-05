@@ -2,24 +2,30 @@ package ex9_fibonacci_matrix;
 
 public class FibonacciMatrix {
 
-    private int[] line1, line2;
+    private long[] line1, line2;
 
     public FibonacciMatrix() {
-        this.line1 = new int[]{0, 0};
-        this.line2 = new int[]{0, 0};
+        this.line1 = new long[]{0, 0};
+        this.line2 = new long[]{0, 0};
     }
 
-    public FibonacciMatrix(int[] line1, int[] line2) {
+    public FibonacciMatrix(long[] line1, long[] line2) {
         this.line1 = line1;
         this.line2 = line2;
     }
 
     public FibonacciMatrix toPower(int n) {
-        FibonacciMatrix result = new FibonacciMatrix();
-        FibonacciMatrix factor = new FibonacciMatrix(new int[]{this.line1[0], this.line1[1]},
-                new int[]{this.line2[0], this.line2[1]});
-        for (int i = 1; i <= n; i++) {
-            result = this.multiplyBy(factor);
+        if (n == 0) return new FibonacciMatrix(new long[]{1,0}, new long[]{0,1});
+
+        FibonacciMatrix result = new FibonacciMatrix(
+                new long[]{this.line1[0], this.line1[1]},
+                new long[]{this.line2[0], this.line2[1]});
+
+        FibonacciMatrix factor = new FibonacciMatrix(
+                new long[]{this.line1[0], this.line1[1]},
+                new long[]{this.line2[0], this.line2[1]});
+        for (int i = 1; i < n; i++) {
+            result = result.multiplyBy(factor);
         }
         return result;
     }
@@ -42,11 +48,11 @@ public class FibonacciMatrix {
                 "[" + this.line2[0] + " " + this.line2[1] + "]\n" ;
     }
 
-    public int[] getLine1() {
+    public long[] getLine1() {
         return this.line1;
     }
 
-    public int[] getLine2() {
+    public long[] getLine2() {
         return this.line2;
     }
 }

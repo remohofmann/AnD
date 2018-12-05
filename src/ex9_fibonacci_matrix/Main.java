@@ -1,5 +1,6 @@
 package ex9_fibonacci_matrix;
 
+import ex6_quicksort.QuickSortSimple;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import week1.FibonacciMemo;
@@ -16,64 +17,44 @@ public class Main extends Application {
     private static HashMap quadraticMap = new HashMap();
     private static HashMap cubicMap = new HashMap();
 
+    private static int averaging = 10;
+
     public static void main(String[] args) {
-        // define number of fibonumbers
-        int n = 30;
+        // define numbers of fibonumbers
+        int n = 50;
+        long[] fibonacciValues = new long[n];
+        long simpleStart, simpleDuration, durationSimpleSum;
 
-    // OLD CODE **********************
-        // Simple Fibonacci
-        for (int j = 1; j <= n; j = j + 2) {
-
+        System.out.println("Fibonacci with matrix calculation");
+        for (int j = 0; j < n; j++) {
             System.out.println();
-            System.out.println("Simple");
-            int[] tmpSimpleArray = new int[j];
+            FibonacciMatrix baseMatrix = new FibonacciMatrix(new long[]{0, 1}, new long[]{1, 1});
 
-            long simpleStart = System.nanoTime();
-            for (int i = 0; i < j; i++) {
-                FibonacciSimple tempF = new FibonacciSimple(i);
-                tmpSimpleArray[i] = (int) tempF.divideAndConquer();
+            durationSimpleSum = 0;
+            for (int i = 0; i < averaging; i++) {
+                simpleStart = System.nanoTime();
+                fibonacciValues[j] = baseMatrix.toPower(j).getLine1()[1];
+                simpleDuration = System.nanoTime() - simpleStart;
+                durationSimpleSum = durationSimpleSum + simpleDuration;
             }
-            long simpleEnd = System.nanoTime();
-
-            for (int i = 0; i < j; i++) {
-                System.out.print(" " + tmpSimpleArray[i]);
-            }
-
             // Add measurements to simpleMap
-            simpleMap.put(j, simpleEnd - simpleStart);
+            simpleMap.put(j, durationSimpleSum / averaging);
+            System.out.println("F(" + j + ") = " + fibonacciValues[j]);
         }
 
-        // Memomoization Fibonacci
-        for (int j = 1; j <= n; j = j + 2) {
-            System.out.println("\nMemo");
-            int[] tmpMemoArray = new int[j];
 
-            long memoStart = System.nanoTime();
-            for (int i = 0; i < j; i++) {
-                FibonacciMemo tempF = new FibonacciMemo(i);
-                tmpMemoArray[i] = (int) tempF.divideAndConquer(tempF.getHashMap());
-            }
-            long memoEnd = System.nanoTime();
-
-            for (int i = 0; i < j; i++) {
-                System.out.print(" " + tmpMemoArray[i]);
-            }
-                // Add measurements to memoMap
-                memoMap.put(j, memoEnd - memoStart);
-
-        }
-        // OLD CODE END **********************
+       /* // OLD CODE END **********************
 
         // compute values for comparing functions (log, linear, ...)
-        for (int j = 1; j <= n; j++){
+        for (int j = 1; j <= n; j++) {
             // linear
             linearMap.put(j, j);
             // log
             logMap.put(j, Math.log(j));
             // quadratic
-            quadraticMap.put(j, j^2);
+            quadraticMap.put(j, j ^ 2);
             // cubic
-            cubicMap.put(j, j^3);
+            cubicMap.put(j, j ^ 3);
         }
 
         // Print out measurements
@@ -99,7 +80,7 @@ public class Main extends Application {
         System.out.println(quadraticMap.toString());
         // cubic
         System.out.println("cubic");
-        System.out.println(cubicMap.toString());
+        System.out.println(cubicMap.toString());*/
 
         launch(args);
     }
@@ -108,8 +89,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             // Show Data
-            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap, linearMap,
-                    logMap, quadraticMap, cubicMap);
+            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap);
+//            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap, linearMap, logMap, quadraticMap, cubicMap);
             viewDataController.showData(primaryStage);
             primaryStage.show();
         } catch (Exception e) {

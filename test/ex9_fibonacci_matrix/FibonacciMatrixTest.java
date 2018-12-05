@@ -10,25 +10,32 @@ public class FibonacciMatrixTest {
     @Test
     public void toPower() {
         FibonacciMatrix oneTwoThreeFour = new FibonacciMatrix(
-                new int[]{1,2},
-                new int[]{3,4});
+                new long[]{1,2},
+                new long[]{3,4});
         FibonacciMatrix toPower2 = oneTwoThreeFour.toPower(2);
         Assert.assertEquals(toPower2.getLine1()[0], 7);
         Assert.assertEquals(toPower2.getLine1()[1], 10);
         Assert.assertEquals(toPower2.getLine2()[0], 15);
         Assert.assertEquals(toPower2.getLine2()[1], 22);
-        System.out.println(oneTwoThreeFour);
-        System.out.println(toPower2);
+
+        FibonacciMatrix toPower3 = oneTwoThreeFour.toPower(3);
+        Assert.assertEquals(toPower3.getLine1()[0], 37);
+        Assert.assertEquals(toPower3.getLine1()[1], 54);
+        Assert.assertEquals(toPower3.getLine2()[0], 81);
+        Assert.assertEquals(toPower3.getLine2()[1], 118);
+        System.out.println("oneTwoThreeFour: \n" + oneTwoThreeFour);
+        System.out.println("oneTwoThreeFour^2: \n" + toPower2);
+        System.out.println("oneTwoThreeFour^3: \n" + toPower3);
     }
 
     @Test
     public void multiplyBy() {
         FibonacciMatrix oneTwoThreeFour = new FibonacciMatrix(
-                new int[]{1,2},
-                new int[]{3,4});
+                new long[]{1,2},
+                new long[]{3,4});
         FibonacciMatrix fiveSixSevenEight = new FibonacciMatrix(
-                new int[]{5,6},
-                new int[]{7,8});
+                new long[]{5,6},
+                new long[]{7,8});
         FibonacciMatrix result = oneTwoThreeFour.multiplyBy(fiveSixSevenEight);
         Assert.assertEquals(result.getLine1()[0], 19);
         Assert.assertEquals(result.getLine1()[1], 22);

@@ -26,7 +26,7 @@ public class ViewDataController extends Application {
     public ViewDataController(HashMap simpleMap, HashMap memoMap, HashMap threadMap) {
         this.simpleMap = simpleMap;
         this.memoMap = memoMap;
-        this.threadMap = memoMap;
+        this.threadMap = threadMap;
     }
 
     public ViewDataController(HashMap simpleMap, HashMap memoMap, HashMap iterativeMap, HashMap linearMap, HashMap logMap, HashMap quadraticMap, HashMap cubicMap) {
@@ -56,7 +56,7 @@ public class ViewDataController extends Application {
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         lineChart.setTitle("Fibonacci Data");
-        xAxis.setLabel("Size of Fibonacci Line");
+        xAxis.setLabel("F(n)");
         yAxis.setLabel("Computation Time");
 
         Scene scene = new Scene(lineChart, 800, 600);
@@ -87,7 +87,7 @@ public class ViewDataController extends Application {
             memoSeries.getData().add(new XYChart.Data(key, this.memoMap.get(key)));
         }
 
-        simpleSeries.setName("Simple");
+        simpleSeries.setName("Fibo Matrix");
         memoSeries.setName("Memoization");
 
         lineChart.getData().add(simpleSeries);
