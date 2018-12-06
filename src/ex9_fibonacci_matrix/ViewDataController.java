@@ -21,6 +21,8 @@ public class ViewDataController extends Application {
     private HashMap quadraticMap;
     private HashMap cubicMap;
     private List<HashMap> mapList;
+    private String[] functionNameList = {"Simple", "Memoization", "Matrix","Linear", "Log", "Quadratic", "Cubic"};
+
 
 
     public ViewDataController(HashMap simpleMap, HashMap memoMap, HashMap threadMap) {
@@ -37,61 +39,48 @@ public class ViewDataController extends Application {
         this.logMap = logMap;
         this.quadraticMap = quadraticMap;
         this.cubicMap = cubicMap;
+        System.out.println("Viewcontroller started");
+        System.out.println(simpleMap);
+        this.mapList = new ArrayList<HashMap>();
 
-// THIS CODELINE DOES NOT WORK!!!
-        //Collections.addAll(this.mapList, simpleMap, memoMap, iterativeMap, linearMap, logMap, quadraticMap, cubicMap);
+        // Make list of hashmaps
+        this.mapList.add(simpleMap);
+        this.mapList.add(memoMap);
+        this.mapList.add(iterativeMap);
+        this.mapList.add(linearMap);
+        this.mapList.add(logMap);
+        this.mapList.add(quadraticMap);
+        this.mapList.add(cubicMap);
+        // Make list of function names
+
+
+
     }
 
     public void showData(Stage primaryStage) {
         Stage stage = primaryStage;
-
-        // Sort Maps
-        TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
-        TreeMap<Integer, Integer> memoTreeMap = new TreeMap<Integer, Integer>(this.memoMap);
-
         stage.setTitle("Fibonacci Algorithms");
-
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-        lineChart.setTitle("Fibonacci Data");
-        xAxis.setLabel("F(n)");
-        yAxis.setLabel("Computation Time");
-
         Scene scene = new Scene(lineChart, 800, 600);
+        lineChart.setTitle("Fibonacci Data");
 
-// THIS CODELINES DOES NOT WORK!!!
-
-//        for(int i = 0; i < mapList.size(); i++){
-//            TreeMap<Integer, Integer> tmpTreeMap = new TreeMap<Integer, Integer>(this.mapList.get(i));
-//            XYChart.Series tmpSeries = new XYChart.Series();
-//            Set<Integer> tmpKeys = tmpTreeMap.keySet();
-//            for (Integer key : tmpKeys) {
-//                tmpSeries.getData().add(new XYChart.Data(key, this.mapList.get(i).get(key)));
-//            }
-//            tmpSeries.setName("Simple");
-//            lineChart.getData().add(tmpSeries);
-//
-//        }
-
-        XYChart.Series simpleSeries = new XYChart.Series();
-        Set<Integer> simpleKeys = simpleTreeMap.keySet();
-        for (Integer key : simpleKeys) {
-            simpleSeries.getData().add(new XYChart.Data(key, this.simpleMap.get(key)));
+        for(int i = 0; i < mapList.size(); i++){
+            TreeMap<Integer, Integer> tmpTreeMap = new TreeMap<Integer, Integer>(this.mapList.get(i));
+            xAxis.setLabel("F(n)");
+            yAxis.setLabel("Computation Time");
+            XYChart.Series tmpSeries = new XYChart.Series();
+            Set<Integer> tmpKeys = tmpTreeMap.keySet();
+            for (Integer key : tmpKeys) {
+                tmpSeries.getData().add(new XYChart.Data(key, this.mapList.get(i).get(key)));
+            }
+            tmpSeries.setName(this.functionNameList[i]);
+            lineChart.getData().add(tmpSeries);
         }
+        yAxis.setUpperBound(30000);
 
-        XYChart.Series memoSeries = new XYChart.Series();
-        Set<Integer> memoKeys = memoTreeMap.keySet();
-        for (Integer key : memoKeys) {
-            memoSeries.getData().add(new XYChart.Data(key, this.memoMap.get(key)));
-        }
-
-        simpleSeries.setName("Fibo Matrix");
-        memoSeries.setName("Memoization");
-
-        lineChart.getData().add(simpleSeries);
-        lineChart.getData().add(memoSeries);
 
         stage.setScene(scene);
         stage.show();
