@@ -49,13 +49,13 @@ public class Main extends Application {
         int constant = 200;
         for (int j = 1; j <= n; j++) {
             // linear
-            linearMap.put(j, j*constant);
+            linearMap.put(j, j*1000);
             // log
-            logMap.put(j, Math.log(j)*constant);
+            logMap.put(j, Math.log(j)*1000);
             // quadratic
-            quadraticMap.put(j, (j * j)*constant);
+            quadraticMap.put(j, (j * j)*10);
             // cubic
-            cubicMap.put(j, (j * j * j)*constant);
+            cubicMap.put(j, (j * j * j)*10);
         }
 
         // Print out measurements

@@ -63,7 +63,8 @@ public class ViewDataController extends Application {
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("F(n)");
         yAxis.setLabel("Computation Time");
-        yAxis.setUpperBound(300000000);
+        yAxis.setAutoRanging(false);
+        yAxis.setUpperBound(100000);
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         Scene scene = new Scene(lineChart, 800, 600);
