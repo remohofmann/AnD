@@ -43,18 +43,19 @@ public class Main extends Application {
         }
 
 
-       /* // OLD CODE END **********************
+       // OLD CODE END **********************
 
         // compute values for comparing functions (log, linear, ...)
+        int constant = 200;
         for (int j = 1; j <= n; j++) {
             // linear
-            linearMap.put(j, j);
+            linearMap.put(j, j*constant);
             // log
-            logMap.put(j, Math.log(j));
+            logMap.put(j, Math.log(j)*constant);
             // quadratic
-            quadraticMap.put(j, j ^ 2);
+            quadraticMap.put(j, (j * j)*constant);
             // cubic
-            cubicMap.put(j, j ^ 3);
+            cubicMap.put(j, (j * j * j)*constant);
         }
 
         // Print out measurements
@@ -80,7 +81,7 @@ public class Main extends Application {
         System.out.println(quadraticMap.toString());
         // cubic
         System.out.println("cubic");
-        System.out.println(cubicMap.toString());*/
+        System.out.println(cubicMap.toString());
 
         launch(args);
     }
@@ -89,8 +90,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             // Show Data
-            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap);
-//            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap, linearMap, logMap, quadraticMap, cubicMap);
+//            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap);
+            ViewDataController viewDataController = new ViewDataController(simpleMap, memoMap, iterativeMap, linearMap, logMap, quadraticMap, cubicMap);
             viewDataController.showData(primaryStage);
             primaryStage.show();
         } catch (Exception e) {

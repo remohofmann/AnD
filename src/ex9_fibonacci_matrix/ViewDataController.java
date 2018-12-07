@@ -51,26 +51,27 @@ public class ViewDataController extends Application {
         this.mapList.add(logMap);
         this.mapList.add(quadraticMap);
         this.mapList.add(cubicMap);
-        // Make list of function names
-
-
 
     }
 
     public void showData(Stage primaryStage) {
         Stage stage = primaryStage;
         stage.setTitle("Fibonacci Algorithms");
+
+        // Axis Properties
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("F(n)");
+        yAxis.setLabel("Computation Time");
+        yAxis.setUpperBound(300000000);
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.setTitle("Fibonacci Data");
 
+        // Add function points to chart
         for(int i = 0; i < mapList.size(); i++){
             TreeMap<Integer, Integer> tmpTreeMap = new TreeMap<Integer, Integer>(this.mapList.get(i));
-            xAxis.setLabel("F(n)");
-            yAxis.setLabel("Computation Time");
             XYChart.Series tmpSeries = new XYChart.Series();
             Set<Integer> tmpKeys = tmpTreeMap.keySet();
             for (Integer key : tmpKeys) {
@@ -79,8 +80,6 @@ public class ViewDataController extends Application {
             tmpSeries.setName(this.functionNameList[i]);
             lineChart.getData().add(tmpSeries);
         }
-        yAxis.setUpperBound(30000);
-
 
         stage.setScene(scene);
         stage.show();
