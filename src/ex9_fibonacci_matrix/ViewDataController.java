@@ -56,7 +56,12 @@ public class ViewDataController extends Application {
 
     public void showData(Stage primaryStage) {
         Stage stage = primaryStage;
-        stage.setTitle("Fibonacci Algorithms");
+
+        // Sort Maps
+        TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
+        TreeMap<Integer, Integer> memoTreeMap = new TreeMap<Integer, Integer>(this.memoMap);
+
+        stage.setTitle("Fibonacci");
 
         // Axis Properties
         final NumberAxis xAxis = new NumberAxis();
