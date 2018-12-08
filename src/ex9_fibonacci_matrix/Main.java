@@ -21,13 +21,12 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // define numbers of fibonumbers
-        int n = 50;
+        int n = 91;
         long[] fibonacciValues = new long[n];
         long simpleStart, simpleDuration, durationSimpleSum;
 
         System.out.println("Fibonacci with matrix calculation");
         for (int j = 0; j < n; j++) {
-            System.out.println();
             FibonacciMatrix baseMatrix = new FibonacciMatrix(new long[]{0, 1}, new long[]{1, 1});
 
             durationSimpleSum = 0;
@@ -38,8 +37,10 @@ public class Main extends Application {
                 durationSimpleSum = durationSimpleSum + simpleDuration;
             }
             // Add measurements to simpleMap
+//            simpleMap.put(j, simpleDuration);
             simpleMap.put(j, durationSimpleSum / averaging);
-            System.out.println("F(" + j + ") = " + fibonacciValues[j]);
+//            System.out.println();
+//            System.out.println("F(" + j + ") = " + fibonacciValues[j]);
         }
 
 

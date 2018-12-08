@@ -49,15 +49,15 @@ public class ViewDataController extends Application {
         TreeMap<Integer, Integer> simpleTreeMap = new TreeMap<Integer, Integer>(this.simpleMap);
         TreeMap<Integer, Integer> memoTreeMap = new TreeMap<Integer, Integer>(this.memoMap);
 
-        stage.setTitle("Fibonacci Algorithms");
+        stage.setTitle("Fibonacci");
 
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
 
         final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-        lineChart.setTitle("Fibonacci Data");
+        lineChart.setTitle("Fibonacci iterative matrix calculation");
         xAxis.setLabel("F(n)");
-        yAxis.setLabel("Computation Time");
+        yAxis.setLabel("Time");
 
         Scene scene = new Scene(lineChart, 800, 600);
 
