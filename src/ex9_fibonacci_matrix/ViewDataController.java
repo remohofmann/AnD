@@ -1,6 +1,5 @@
 package ex9_fibonacci_matrix;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
