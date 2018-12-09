@@ -10,14 +10,14 @@ import javafx.stage.Stage;
 import java.util.*;
 
 
-public class ViewDataController extends Application {
+public class ViewDataController  {
 
     private List<HashMap> mapList;
-    private String[] functionNameList = {"Matrix (lines)", "Matrix (columns)", "Matrix (optimized)", "Linear", "Log", "Quadratic", "Cubic"};
+    private String[] functionNameList = {"Matrix (lines)", "Matrix (columns)", "Matrix (optimized)", "Simple", "Memo", "Threads", "Linear", "Log", "Quadratic", "Cubic"};
 
 
 
-    public ViewDataController(HashMap matrixMap, HashMap matrixColMap, HashMap matrixOptMap, HashMap linearMap, HashMap logMap, HashMap quadraticMap, HashMap cubicMap) {
+    public ViewDataController(HashMap matrixMap, HashMap matrixColMap, HashMap matrixOptMap, HashMap simpleMap, HashMap memoMap, HashMap threadsMap, HashMap linearMap, HashMap logMap, HashMap quadraticMap, HashMap cubicMap) {
       /*  System.out.println("Viewcontroller started");
         System.out.println(simpleMap);*/
 
@@ -28,6 +28,9 @@ public class ViewDataController extends Application {
         this.mapList.add(matrixMap);
         this.mapList.add(matrixColMap);
         this.mapList.add(matrixOptMap);
+        this.mapList.add(simpleMap);
+        this.mapList.add(memoMap);
+        this.mapList.add(threadsMap);
         this.mapList.add(linearMap);
         this.mapList.add(logMap);
         this.mapList.add(quadraticMap);
@@ -35,10 +38,9 @@ public class ViewDataController extends Application {
 
     }
 
-    public void showData(Stage primaryStage) {
+    public Stage setupStage(Stage primaryStage) {
         // Stage properties
-        Stage stage = primaryStage;
-        stage.setTitle("Fibonacci");
+        primaryStage.setTitle("Fibonacci");
 
         // Overall Axis Properties
         final NumberAxis xAxis = new NumberAxis();
@@ -66,13 +68,8 @@ public class ViewDataController extends Application {
             lineChart.getData().add(tmpSeries);
         }
 
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.showData(primaryStage);
+        primaryStage.setScene(scene);
+        return primaryStage;
     }
 }
 
