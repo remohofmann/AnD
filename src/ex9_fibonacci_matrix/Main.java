@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Main extends Application {
 
     private static HashMap matrixMap = new HashMap();
-    private static HashMap memoMap = new HashMap();
+    private static HashMap matrixColMap = new HashMap();
     private static HashMap linearMap = new HashMap();
     private static HashMap logMap = new HashMap();
     private static HashMap quadraticMap = new HashMap();
@@ -20,11 +20,12 @@ public class Main extends Application {
         // define numbers of fibonumbers, for 'long' we might not exceed F(92)!
         int n = 93;
         long[] fibonacciValues = new long[n];
+        long[] fibonacciValuesCol = new long[n];
         long matrixStart, matrixDuration, matrixDurationSum;
 
+        // fibonacci calculation using a matrix made of lines
         for (int j = 0; j < n; j++) {
             FibonacciMatrix baseMatrix = new FibonacciMatrix(new long[]{0, 1}, new long[]{1, 1});
-
             matrixDurationSum = 0;
             for (int i = 0; i < averaging; i++) {
                 matrixStart = System.nanoTime();
@@ -35,12 +36,23 @@ public class Main extends Application {
             // Add measurements to matrixMap
             matrixMap.put(j, matrixDurationSum / averaging);
         }
+        // fibonacci calculation using a matrix made of columns
         for (int j = 0; j < n; j++) {
-            System.out.println("F(" + j + ") = " + fibonacciValues[j]);
+            FiboMatrixColumn baseMatrixCol = new FiboMatrixColumn(new long[]{0, 1}, new long[]{1, 1});
+            matrixDurationSum = 0;
+            for (int i = 0; i < averaging; i++) {
+                matrixStart = System.nanoTime();
+                fibonacciValuesCol[j] = baseMatrixCol.toPower(j).getColumn1()[0];
+                matrixDuration = System.nanoTime() - matrixStart;
+                matrixDurationSum = matrixDurationSum + matrixDuration;
+            }
+            // Add measurements to matrixMap
+            matrixColMap.put(j, matrixDurationSum / averaging);
         }
-
-
-       // OLD CODE END **********************
+        System.out.println("F(n) - lineMatrix \t F(n) - columnMatrix");
+        for (int j = 0; j < n; j++) {
+            System.out.println("F(" + j + ") = " + fibonacciValues[j] + "\t" + "F(" + j + ") = " + fibonacciValuesCol[j]);
+        }
 
         // compute values for comparing functions (log, linear, ...)
         for (int j = 1; j <= n; j++) {
@@ -55,9 +67,15 @@ public class Main extends Application {
         }
 
         // Print out measurements
-        // Simple
+        // Matrix
         System.out.println();
-        System.out.println("MatrixMap times");
+        System.out.println("MatrixLine times");
+        System.out.println(matrixMap.toString());
+        System.out.println();
+
+        // Matrix column
+        System.out.println();
+        System.out.println("MatrixColumn times");
         System.out.println(matrixMap.toString());
         System.out.println();
 
@@ -85,7 +103,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             // Show Data
-            ViewDataController viewDataController = new ViewDataController(matrixMap, linearMap, logMap, quadraticMap, cubicMap);
+            ViewDataController viewDataController = new ViewDataController(matrixMap, matrixColMap, linearMap, logMap, quadraticMap, cubicMap);
             viewDataController.showData(primaryStage);
             primaryStage.show();
         } catch (Exception e) {

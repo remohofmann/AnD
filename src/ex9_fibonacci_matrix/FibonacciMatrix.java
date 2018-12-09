@@ -16,7 +16,7 @@ public class FibonacciMatrix {
 
     public FibonacciMatrix toPower(int n) {
         if (n == 0) return new FibonacciMatrix(new long[]{1,0}, new long[]{0,1});
-
+        else if (n == 1) return new FibonacciMatrix(this.line1, this.line2);
         FibonacciMatrix result = new FibonacciMatrix(
                 new long[]{this.line1[0], this.line1[1]},
                 new long[]{this.line2[0], this.line2[1]});

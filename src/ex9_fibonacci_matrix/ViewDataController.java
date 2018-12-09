@@ -13,11 +13,11 @@ import java.util.*;
 public class ViewDataController extends Application {
 
     private List<HashMap> mapList;
-    private String[] functionNameList = {"Matrix (lines)","Linear", "Log", "Quadratic", "Cubic"};
+    private String[] functionNameList = {"Matrix (lines)", "Matrix (columns)","Linear", "Log", "Quadratic", "Cubic"};
 
 
 
-    public ViewDataController(HashMap matrixMap, HashMap linearMap, HashMap logMap, HashMap quadraticMap, HashMap cubicMap) {
+    public ViewDataController(HashMap matrixMap, HashMap matrixColMap, HashMap linearMap, HashMap logMap, HashMap quadraticMap, HashMap cubicMap) {
       /*  System.out.println("Viewcontroller started");
         System.out.println(simpleMap);*/
 
@@ -26,6 +26,7 @@ public class ViewDataController extends Application {
         // ATTENTION: hashmaps have to be added in the same order as they are
         // listed in the 'functionNameList'!
         this.mapList.add(matrixMap);
+        this.mapList.add(matrixColMap);
         this.mapList.add(linearMap);
         this.mapList.add(logMap);
         this.mapList.add(quadraticMap);
