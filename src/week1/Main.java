@@ -54,11 +54,8 @@ public class Main extends Application {
             for (int i = 0; i < j; i++) {
                 System.out.print(" " + tmpMemoArray[i]);
             }
-
-
-
-                // Add measurements to memoMap
-                memoMap.put(j, memoEnd - memoStart);
+            // Add measurements to memoMap
+            memoMap.put(j, memoEnd - memoStart);
 
 
         }
