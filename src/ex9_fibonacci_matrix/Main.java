@@ -125,7 +125,7 @@ public class Main extends Application {
         }
 
 
-        if (false) {
+        if (printToConsole) {
             System.out.println("Fibonacci numbers calculation verification!");
             System.out.println("F(n) - lineMatrix \t F(n) - columnMatrix \t F(n) - optimized" +
                     "\t F(n) - simple \t F(n) - memo \t F(n) - threads");

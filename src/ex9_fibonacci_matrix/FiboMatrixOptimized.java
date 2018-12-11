@@ -9,12 +9,24 @@ public class FiboMatrixOptimized {
      * base matrix is:
      * [0 1]
      * [1 1]
-     * where a,b,c matrix defined as:
+     * so:
+     * [0 1]^2  =   [1 1]
+     * [1 1]        [1 2]
+     * and
+     * [1 1]^2  =   [1 2]
+     * [1 2]        [2 3]
+     * and so on.
+     * So, with an a,b,c matrix defined as:
      * [a b]
      * [b c]
-     * thus, matrix * matrix is:
-     * [b c]
-     * [c b+c]
+     * matrix * base is:
+     * [a b] [0 1]  =   [b c]
+     * [b c] [1 1]      [c b+c]
+     * So:
+     * - calculation is reduced to an array of 3 items
+     * - a -> b
+     * - b -> c
+     * - c -> b+c
      */
 
     public FiboMatrixOptimized() {
@@ -34,12 +46,11 @@ public class FiboMatrixOptimized {
         if (n == 0) return new FiboMatrixOptimized(1, 0, 1);
         else if (n == 1) return new FiboMatrixOptimized();
         FiboMatrixOptimized result = new FiboMatrixOptimized();
-        long bTemporary;
         for (int i = 1; i < n; i++) {
-            bTemporary = result.b;
             result.a = result.b;
             result.b = result.c;
-            result.c = bTemporary + result.c;
+            // c = b+c, where b is now saved in a, thus:
+            result.c = result.a + result.c;
         }
         return result;
     }
